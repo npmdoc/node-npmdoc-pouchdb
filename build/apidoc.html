@@ -1,0 +1,2936 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/pouchdb/pouchdb#readme"
+
+    >pouchdb (v6.1.2)</a>
+</h1>
+<h4>PouchDB is a pocket-sized database</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb">module pouchdb</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapter">
+            function <span class="apidocSignatureSpan">pouchdb.</span>adapter
+            <span class="apidocSignatureSpan">(id, obj$$1, addToPreferredAdapters)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.http">
+            function <span class="apidocSignatureSpan">pouchdb.</span>adapters.http
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.leveldb">
+            function <span class="apidocSignatureSpan">pouchdb.</span>adapters.leveldb
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.addListener">
+            function <span class="apidocSignatureSpan">pouchdb.</span>addListener
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug">
+            function <span class="apidocSignatureSpan">pouchdb.</span>debug
+            <span class="apidocSignatureSpan">(namespace)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.defaults">
+            function <span class="apidocSignatureSpan">pouchdb.</span>defaults
+            <span class="apidocSignatureSpan">(defaultOpts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.emit">
+            function <span class="apidocSignatureSpan">pouchdb.</span>emit
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.eventNames">
+            function <span class="apidocSignatureSpan">pouchdb.</span>eventNames
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.getMaxListeners">
+            function <span class="apidocSignatureSpan">pouchdb.</span>getMaxListeners
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.listenerCount">
+            function <span class="apidocSignatureSpan">pouchdb.</span>listenerCount
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.listeners">
+            function <span class="apidocSignatureSpan">pouchdb.</span>listeners
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.on">
+            function <span class="apidocSignatureSpan">pouchdb.</span>on
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.once">
+            function <span class="apidocSignatureSpan">pouchdb.</span>once
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.plugin">
+            function <span class="apidocSignatureSpan">pouchdb.</span>plugin
+            <span class="apidocSignatureSpan">(obj$$1)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.prependListener">
+            function <span class="apidocSignatureSpan">pouchdb.</span>prependListener
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.prependOnceListener">
+            function <span class="apidocSignatureSpan">pouchdb.</span>prependOnceListener
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.removeAllListeners">
+            function <span class="apidocSignatureSpan">pouchdb.</span>removeAllListeners
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.removeListener">
+            function <span class="apidocSignatureSpan">pouchdb.</span>removeListener
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.replicate">
+            function <span class="apidocSignatureSpan">pouchdb.</span>replicate
+            <span class="apidocSignatureSpan">(src, target, opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.setMaxListeners">
+            function <span class="apidocSignatureSpan">pouchdb.</span>setMaxListeners
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_">
+            function <span class="apidocSignatureSpan">pouchdb.</span>super_
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.sync">
+            function <span class="apidocSignatureSpan">pouchdb.</span>sync
+            <span class="apidocSignatureSpan">(src, target, opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.</span>_destructionListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.</span>adapters</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.</span>debug.formatters</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.</span>preferredAdapters</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.</span>super_.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">pouchdb.</span>prefix</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">pouchdb.</span>version</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.adapters">module pouchdb.adapters</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.http">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.</span>http
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.https">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.</span>https
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.leveldb">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.</span>leveldb
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.adapters.http">module pouchdb.adapters.http</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.http.http">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.</span>http
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.http.valid">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.http.</span>valid
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.adapters.leveldb">module pouchdb.adapters.leveldb</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">pouchdb.adapters.leveldb.</span>use_prefix</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.leveldb.leveldb">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.</span>leveldb
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.adapters.leveldb.valid">
+            function <span class="apidocSignatureSpan">pouchdb.adapters.leveldb.</span>valid
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.debug">module pouchdb.debug</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.debug">
+            function <span class="apidocSignatureSpan">pouchdb.</span>debug
+            <span class="apidocSignatureSpan">(namespace)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.coerce">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>coerce
+            <span class="apidocSignatureSpan">(val)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.default">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>default
+            <span class="apidocSignatureSpan">(namespace)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.disable">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>disable
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.enable">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>enable
+            <span class="apidocSignatureSpan">(namespaces)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.enabled">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>enabled
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.formatArgs">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>formatArgs
+            <span class="apidocSignatureSpan">(args)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.humanize">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>humanize
+            <span class="apidocSignatureSpan">(val, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.init">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>init
+            <span class="apidocSignatureSpan">(debug)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.load">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>load
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.log">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>log
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.save">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>save
+            <span class="apidocSignatureSpan">(namespaces)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.useColors">
+            function <span class="apidocSignatureSpan">pouchdb.debug.</span>useColors
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.debug.</span>colors</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.debug.</span>formatters</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.debug.</span>inspectOpts</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.debug.</span>names</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pouchdb.debug.</span>skips</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.debug.formatters">module pouchdb.debug.formatters</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.formatters.O">
+            function <span class="apidocSignatureSpan">pouchdb.debug.formatters.</span>O
+            <span class="apidocSignatureSpan">(v)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.debug.formatters.o">
+            function <span class="apidocSignatureSpan">pouchdb.debug.formatters.</span>o
+            <span class="apidocSignatureSpan">(v)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.super_">module pouchdb.super_</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.super_">
+            function <span class="apidocSignatureSpan">pouchdb.</span>super_
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb.super_.prototype">module pouchdb.super_.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype._compact">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>_compact
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.allDocs">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>allDocs
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.bulkDocs">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>bulkDocs
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.bulkGet">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>bulkGet
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.changes">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>changes
+            <span class="apidocSignatureSpan">(opts, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.close">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>close
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.compact">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>compact
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.compactDocument">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>compactDocument
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.destroy">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>destroy
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.get">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>get
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.getAttachment">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>getAttachment
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.id">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>id
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.info">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>info
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.post">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>post
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.put">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>put
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.putAttachment">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>putAttachment
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.registerDependentDatabase">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>registerDependentDatabase
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.remove">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>remove
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.removeAttachment">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>removeAttachment
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.revsDiff">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>revsDiff
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pouchdb.super_.prototype.type">
+            function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>type
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb" id="apidoc.module.pouchdb">module pouchdb</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapter" id="apidoc.element.pouchdb.adapter">
+        function <span class="apidocSignatureSpan">pouchdb.</span>adapter
+        <span class="apidocSignatureSpan">(id, obj$$1, addToPreferredAdapters)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">adapter = function (id, obj$$1, addToPreferredAdapters) {
+<span class="apidocCodeCommentSpan">  /* istanbul ignore else */
+</span>  if (obj$$1.valid()) {
+    PouchDB$5.adapters[id] = obj$$1;
+    if (addToPreferredAdapters) {
+      PouchDB$5.preferredAdapters.push(id);
+    }
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.http" id="apidoc.element.pouchdb.adapters.http">
+        function <span class="apidocSignatureSpan">pouchdb.</span>adapters.http
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function HttpPouch(opts, callback) {
+
+  // The functions that will be publicly available for HttpPouch
+  var api = this;
+
+  var host = getHost(opts.name, opts);
+  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+
+  opts = clone(opts);
+  var ajaxOpts = opts.ajax || {};
+
+  if (opts.auth || host.auth) {
+    var nAuth = opts.auth || host.auth;
+    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var token = thisBtoa(unescape(encodeURIComponent(str)));
+    ajaxOpts.headers = ajaxOpts.headers || {};
+    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+  }
+
+  // Not strictly necessary, but we do this because numerous tests
+  // rely on swapping ajax in and out.
+  api._ajax = ajax;
+
+  function ajax$$1(userOpts, options, callback) {
+    var reqAjax = userOpts.ajax || {};
+    var reqOpts = $inject_Object_assign(clone(ajaxOpts), reqAjax, options);
+    var defaultHeaders = clone(ajaxOpts.headers || {});
+    reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
+      options.headers || {});
+    log$1(reqOpts.method + &#x27; &#x27; + reqOpts.url);
+    return api._ajax(reqOpts, callback);
+  }
+
+  function ajaxPromise(userOpts, opts) {
+    return new PouchPromise$1(function (resolve, reject) {
+      ajax$$1(userOpts, opts, function (err, res$$1) {
+<span class="apidocCodeCommentSpan">        /* istanbul ignore if */
+</span>        if (err) {
+          return reject(err);
+        }
+        resolve(res$$1);
+      });
+    });
+  }
+
+  function adapterFun$$1(name, fun) {
+    return adapterFun(name, getArguments(function (args) {
+      setup().then(function () {
+        return fun.apply(this, args);
+      }).catch(function (e) {
+        var callback = args.pop();
+        callback(e);
+      });
+    }));
+  }
+
+  var setupPromise;
+
+  function setup() {
+    // TODO: Remove `skipSetup` in favor of `skip_setup` in a future release
+    if (opts.skipSetup || opts.skip_setup) {
+      return PouchPromise$1.resolve();
+    }
+
+    // If there is a setup in process or previous successful setup
+    // done then we will use that
+    // If previous setups have been rejected we will try again
+    if (setupPromise) {
+      return setupPromise;
+    }
+
+    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+        // Doesnt exist, create it
+        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
+        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+      } else {
+        return PouchPromise$1.reject(err);
+      }
+    }).catch(function (err) {
+      // If we try to create a database that already exists, skipped in
+      // istanbul since its catching a race condition.
+      /* istanbul ignore if */
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+        return true;
+      }
+      return PouchPromise$1.reject(err);
+    });
+
+    setupPromise.catch(function () {
+      setupPromise = null;
+    });
+
+    return setupPromise;
+  }
+
+  nextTick(function () {
+    callback(null, api);
+  });
+
+  api.type = function () {
+    return &#x27;http&#x27;;
+  };
+
+  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
+    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
+      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+      callback(null, uuid$$1);
+    });
+  });
+
+  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+    options.url = genDBUrl(host, options.url);
+    ajax$$1({}, options, callback);
+  });
+
+  // Sends a POST request to the host calling the couchdb _compact function
+  //    version: The version of CouchDB it is running
+  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
+    if (typeof opts === &#x27;function&#x27;) {
+      callback = opts;
+      opts = {};
+    }
+    opts = clone(opts);
+    ajax$$1(opts, {
+      url: genDBUrl(host, &#x27;_compact&#x27;),
+      method: &#x27;POST&#x27;
+    }, function () {
+      function ping() {
+        api.info(function (err, res$$1) {
+          if (res$$1 &#x26;&#x26; !res$$1.compact_running) {
+            callback(null, {ok: true});
+          } else {
+            setTimeout(ping, opts ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.leveldb" id="apidoc.element.pouchdb.adapters.leveldb">
+        function <span class="apidocSignatureSpan">pouchdb.</span>adapters.leveldb
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function LevelDownPouch(opts, callback) {
+
+  // Users can pass in their own leveldown alternative here, in which case
+  // it overrides the default one. (This is in addition to the custom builds.)
+  var leveldown = opts.db;
+
+<span class="apidocCodeCommentSpan">  /* istanbul ignore else */
+</span>  if (!leveldown) {
+    leveldown = requireLeveldown();
+
+    /* istanbul ignore if */
+    if (leveldown instanceof Error) {
+      return callback(leveldown);
+    }
+  }
+
+  var _opts = $inject_Object_assign({
+    db: leveldown,
+    migrate: migrate
+  }, opts);
+
+  LevelPouch$1.call(this, _opts, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.addListener" id="apidoc.element.pouchdb.addListener">
+        function <span class="apidocSignatureSpan">pouchdb.</span>addListener
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addListener = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug" id="apidoc.element.pouchdb.debug">
+        function <span class="apidocSignatureSpan">pouchdb.</span>debug
+        <span class="apidocSignatureSpan">(namespace)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createDebug(namespace) {
+
+  function debug() {
+    // disabled?
+    if (!debug.enabled) return;
+
+    var self = debug;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // turn the `arguments` into a proper Array
+    var args = new Array(arguments.length);
+    for (var i = 0; i &#x3c; args.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    args[0] = exports.coerce(args[0]);
+
+    if (&#x27;string&#x27; !== typeof args[0]) {
+      // anything else let&#x27;s inspect with %O
+      args.unshift(&#x27;%O&#x27;);
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+      // if we encounter an escaped % then don&#x27;t increase the array index
+      if (match === &#x27;%%&#x27;) return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if (&#x27;function&#x27; === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    // apply env-specific formatting (colors, etc.)
+    exports.formatArgs.call(self, args);
+
+    var logFn = debug.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+
+  debug.namespace = namespace;
+  debug.enabled = exports.enabled(namespace);
+  debug.useColors = exports.useColors();
+  debug.color = selectColor(namespace);
+
+  // env-specific initialization logic for debug instances
+  if (&#x27;function&#x27; === typeof exports.init) {
+    exports.init(debug);
+  }
+
+  return debug;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.defaults" id="apidoc.element.pouchdb.defaults">
+        function <span class="apidocSignatureSpan">pouchdb.</span>defaults
+        <span class="apidocSignatureSpan">(defaultOpts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">defaults = function (defaultOpts) {
+  function PouchAlt(name, opts) {
+    if (!(this instanceof PouchAlt)) {
+      return new PouchAlt(name, opts);
+    }
+
+    opts = opts || {};
+
+    if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+      opts = name;
+      name = opts.name;
+      delete opts.name;
+    }
+
+    opts = $inject_Object_assign({}, PouchAlt.__defaults, opts);
+    PouchDB$5.call(this, name, opts);
+  }
+
+  inherits(PouchAlt, PouchDB$5);
+
+  PouchAlt.preferredAdapters = PouchDB$5.preferredAdapters.slice();
+  Object.keys(PouchDB$5).forEach(function (key) {
+    if (!(key in PouchAlt)) {
+      PouchAlt[key] = PouchDB$5[key];
+    }
+  });
+
+  // make default options transitive
+  // https://github.com/pouchdb/pouchdb/issues/5922
+  PouchAlt.__defaults = $inject_Object_assign({}, this.__defaults, defaultOpts);
+
+  return PouchAlt;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.emit" id="apidoc.element.pouchdb.emit">
+        function <span class="apidocSignatureSpan">pouchdb.</span>emit
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">emit = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.eventNames" id="apidoc.element.pouchdb.eventNames">
+        function <span class="apidocSignatureSpan">pouchdb.</span>eventNames
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">eventNames = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.getMaxListeners" id="apidoc.element.pouchdb.getMaxListeners">
+        function <span class="apidocSignatureSpan">pouchdb.</span>getMaxListeners
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getMaxListeners = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.listenerCount" id="apidoc.element.pouchdb.listenerCount">
+        function <span class="apidocSignatureSpan">pouchdb.</span>listenerCount
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.listeners" id="apidoc.element.pouchdb.listeners">
+        function <span class="apidocSignatureSpan">pouchdb.</span>listeners
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listeners = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.on" id="apidoc.element.pouchdb.on">
+        function <span class="apidocSignatureSpan">pouchdb.</span>on
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">on = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.once" id="apidoc.element.pouchdb.once">
+        function <span class="apidocSignatureSpan">pouchdb.</span>once
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">once = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.plugin" id="apidoc.element.pouchdb.plugin">
+        function <span class="apidocSignatureSpan">pouchdb.</span>plugin
+        <span class="apidocSignatureSpan">(obj$$1)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">plugin = function (obj$$1) {
+  if (typeof obj$$1 === &#x27;function&#x27;) { // function style for plugins
+    obj$$1(PouchDB$5);
+  } else if (typeof obj$$1 !== &#x27;object&#x27; || Object.keys(obj$$1).length === 0){
+    throw new Error(&#x27;Invalid plugin: got \&#x22;&#x27; + obj$$1 + &#x27;\&#x22;, expected an object or a function&#x27;);
+  } else {
+    Object.keys(obj$$1).forEach(function (id) { // object style for plugins
+      PouchDB$5.prototype[id] = obj$$1[id];
+    });
+  }
+  if (this.__defaults) {
+    PouchDB$5.__defaults = $inject_Object_assign({}, this.__defaults);
+  }
+  return PouchDB$5;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.prependListener" id="apidoc.element.pouchdb.prependListener">
+        function <span class="apidocSignatureSpan">pouchdb.</span>prependListener
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">prependListener = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.prependOnceListener" id="apidoc.element.pouchdb.prependOnceListener">
+        function <span class="apidocSignatureSpan">pouchdb.</span>prependOnceListener
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">prependOnceListener = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.removeAllListeners" id="apidoc.element.pouchdb.removeAllListeners">
+        function <span class="apidocSignatureSpan">pouchdb.</span>removeAllListeners
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">removeAllListeners = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.removeListener" id="apidoc.element.pouchdb.removeListener">
+        function <span class="apidocSignatureSpan">pouchdb.</span>removeListener
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">removeListener = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.replicate" id="apidoc.element.pouchdb.replicate">
+        function <span class="apidocSignatureSpan">pouchdb.</span>replicate
+        <span class="apidocSignatureSpan">(src, target, opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function replicateWrapper(src, target, opts, callback) {
+
+  if (typeof opts === &#x27;function&#x27;) {
+    callback = opts;
+    opts = {};
+  }
+  if (typeof opts === &#x27;undefined&#x27;) {
+    opts = {};
+  }
+
+  if (opts.doc_ids &#x26;&#x26; !Array.isArray(opts.doc_ids)) {
+    throw createError(BAD_REQUEST,
+                       &#x22;`doc_ids` filter parameter is not a list.&#x22;);
+  }
+
+  opts.complete = callback;
+  opts = clone(opts);
+  opts.continuous = opts.continuous || opts.live;
+  opts.retry = (&#x27;retry&#x27; in opts) ? opts.retry : false;
+<span class="apidocCodeCommentSpan">  /*jshint validthis:true */
+</span>  opts.PouchConstructor = opts.PouchConstructor || this;
+  var replicateRet = new Replication(opts);
+  var srcPouch = toPouch(src, opts);
+  var targetPouch = toPouch(target, opts);
+  replicate(srcPouch, targetPouch, opts, replicateRet);
+  return replicateRet;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.setMaxListeners" id="apidoc.element.pouchdb.setMaxListeners">
+        function <span class="apidocSignatureSpan">pouchdb.</span>setMaxListeners
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setMaxListeners = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_" id="apidoc.element.pouchdb.super_">
+        function <span class="apidocSignatureSpan">pouchdb.</span>super_
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function AbstractPouchDB() {
+  events.EventEmitter.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.sync" id="apidoc.element.pouchdb.sync">
+        function <span class="apidocSignatureSpan">pouchdb.</span>sync
+        <span class="apidocSignatureSpan">(src, target, opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function sync$1(src, target, opts, callback) {
+  if (typeof opts === &#x27;function&#x27;) {
+    callback = opts;
+    opts = {};
+  }
+  if (typeof opts === &#x27;undefined&#x27;) {
+    opts = {};
+  }
+  opts = clone(opts);
+<span class="apidocCodeCommentSpan">  /*jshint validthis:true */
+</span>  opts.PouchConstructor = opts.PouchConstructor || this;
+  src = toPouch(src, opts);
+  target = toPouch(target, opts);
+  return new Sync(src, target, opts, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.adapters" id="apidoc.module.pouchdb.adapters">module pouchdb.adapters</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.http" id="apidoc.element.pouchdb.adapters.http">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.</span>http
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function HttpPouch(opts, callback) {
+
+  // The functions that will be publicly available for HttpPouch
+  var api = this;
+
+  var host = getHost(opts.name, opts);
+  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+
+  opts = clone(opts);
+  var ajaxOpts = opts.ajax || {};
+
+  if (opts.auth || host.auth) {
+    var nAuth = opts.auth || host.auth;
+    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var token = thisBtoa(unescape(encodeURIComponent(str)));
+    ajaxOpts.headers = ajaxOpts.headers || {};
+    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+  }
+
+  // Not strictly necessary, but we do this because numerous tests
+  // rely on swapping ajax in and out.
+  api._ajax = ajax;
+
+  function ajax$$1(userOpts, options, callback) {
+    var reqAjax = userOpts.ajax || {};
+    var reqOpts = $inject_Object_assign(clone(ajaxOpts), reqAjax, options);
+    var defaultHeaders = clone(ajaxOpts.headers || {});
+    reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
+      options.headers || {});
+    log$1(reqOpts.method + &#x27; &#x27; + reqOpts.url);
+    return api._ajax(reqOpts, callback);
+  }
+
+  function ajaxPromise(userOpts, opts) {
+    return new PouchPromise$1(function (resolve, reject) {
+      ajax$$1(userOpts, opts, function (err, res$$1) {
+<span class="apidocCodeCommentSpan">        /* istanbul ignore if */
+</span>        if (err) {
+          return reject(err);
+        }
+        resolve(res$$1);
+      });
+    });
+  }
+
+  function adapterFun$$1(name, fun) {
+    return adapterFun(name, getArguments(function (args) {
+      setup().then(function () {
+        return fun.apply(this, args);
+      }).catch(function (e) {
+        var callback = args.pop();
+        callback(e);
+      });
+    }));
+  }
+
+  var setupPromise;
+
+  function setup() {
+    // TODO: Remove `skipSetup` in favor of `skip_setup` in a future release
+    if (opts.skipSetup || opts.skip_setup) {
+      return PouchPromise$1.resolve();
+    }
+
+    // If there is a setup in process or previous successful setup
+    // done then we will use that
+    // If previous setups have been rejected we will try again
+    if (setupPromise) {
+      return setupPromise;
+    }
+
+    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+        // Doesnt exist, create it
+        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
+        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+      } else {
+        return PouchPromise$1.reject(err);
+      }
+    }).catch(function (err) {
+      // If we try to create a database that already exists, skipped in
+      // istanbul since its catching a race condition.
+      /* istanbul ignore if */
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+        return true;
+      }
+      return PouchPromise$1.reject(err);
+    });
+
+    setupPromise.catch(function () {
+      setupPromise = null;
+    });
+
+    return setupPromise;
+  }
+
+  nextTick(function () {
+    callback(null, api);
+  });
+
+  api.type = function () {
+    return &#x27;http&#x27;;
+  };
+
+  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
+    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
+      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+      callback(null, uuid$$1);
+    });
+  });
+
+  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+    options.url = genDBUrl(host, options.url);
+    ajax$$1({}, options, callback);
+  });
+
+  // Sends a POST request to the host calling the couchdb _compact function
+  //    version: The version of CouchDB it is running
+  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
+    if (typeof opts === &#x27;function&#x27;) {
+      callback = opts;
+      opts = {};
+    }
+    opts = clone(opts);
+    ajax$$1(opts, {
+      url: genDBUrl(host, &#x27;_compact&#x27;),
+      method: &#x27;POST&#x27;
+    }, function () {
+      function ping() {
+        api.info(function (err, res$$1) {
+          if (res$$1 &#x26;&#x26; !res$$1.compact_running) {
+            callback(null, {ok: true});
+          } else {
+            setTimeout(ping, opts ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.https" id="apidoc.element.pouchdb.adapters.https">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.</span>https
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function HttpPouch(opts, callback) {
+
+  // The functions that will be publicly available for HttpPouch
+  var api = this;
+
+  var host = getHost(opts.name, opts);
+  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+
+  opts = clone(opts);
+  var ajaxOpts = opts.ajax || {};
+
+  if (opts.auth || host.auth) {
+    var nAuth = opts.auth || host.auth;
+    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var token = thisBtoa(unescape(encodeURIComponent(str)));
+    ajaxOpts.headers = ajaxOpts.headers || {};
+    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+  }
+
+  // Not strictly necessary, but we do this because numerous tests
+  // rely on swapping ajax in and out.
+  api._ajax = ajax;
+
+  function ajax$$1(userOpts, options, callback) {
+    var reqAjax = userOpts.ajax || {};
+    var reqOpts = $inject_Object_assign(clone(ajaxOpts), reqAjax, options);
+    var defaultHeaders = clone(ajaxOpts.headers || {});
+    reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
+      options.headers || {});
+    log$1(reqOpts.method + &#x27; &#x27; + reqOpts.url);
+    return api._ajax(reqOpts, callback);
+  }
+
+  function ajaxPromise(userOpts, opts) {
+    return new PouchPromise$1(function (resolve, reject) {
+      ajax$$1(userOpts, opts, function (err, res$$1) {
+<span class="apidocCodeCommentSpan">        /* istanbul ignore if */
+</span>        if (err) {
+          return reject(err);
+        }
+        resolve(res$$1);
+      });
+    });
+  }
+
+  function adapterFun$$1(name, fun) {
+    return adapterFun(name, getArguments(function (args) {
+      setup().then(function () {
+        return fun.apply(this, args);
+      }).catch(function (e) {
+        var callback = args.pop();
+        callback(e);
+      });
+    }));
+  }
+
+  var setupPromise;
+
+  function setup() {
+    // TODO: Remove `skipSetup` in favor of `skip_setup` in a future release
+    if (opts.skipSetup || opts.skip_setup) {
+      return PouchPromise$1.resolve();
+    }
+
+    // If there is a setup in process or previous successful setup
+    // done then we will use that
+    // If previous setups have been rejected we will try again
+    if (setupPromise) {
+      return setupPromise;
+    }
+
+    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+        // Doesnt exist, create it
+        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
+        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+      } else {
+        return PouchPromise$1.reject(err);
+      }
+    }).catch(function (err) {
+      // If we try to create a database that already exists, skipped in
+      // istanbul since its catching a race condition.
+      /* istanbul ignore if */
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+        return true;
+      }
+      return PouchPromise$1.reject(err);
+    });
+
+    setupPromise.catch(function () {
+      setupPromise = null;
+    });
+
+    return setupPromise;
+  }
+
+  nextTick(function () {
+    callback(null, api);
+  });
+
+  api.type = function () {
+    return &#x27;http&#x27;;
+  };
+
+  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
+    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
+      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+      callback(null, uuid$$1);
+    });
+  });
+
+  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+    options.url = genDBUrl(host, options.url);
+    ajax$$1({}, options, callback);
+  });
+
+  // Sends a POST request to the host calling the couchdb _compact function
+  //    version: The version of CouchDB it is running
+  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
+    if (typeof opts === &#x27;function&#x27;) {
+      callback = opts;
+      opts = {};
+    }
+    opts = clone(opts);
+    ajax$$1(opts, {
+      url: genDBUrl(host, &#x27;_compact&#x27;),
+      method: &#x27;POST&#x27;
+    }, function () {
+      function ping() {
+        api.info(function (err, res$$1) {
+          if (res$$1 &#x26;&#x26; !res$$1.compact_running) {
+            callback(null, {ok: true});
+          } else {
+            setTimeout(ping, opts ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.leveldb" id="apidoc.element.pouchdb.adapters.leveldb">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.</span>leveldb
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function LevelDownPouch(opts, callback) {
+
+  // Users can pass in their own leveldown alternative here, in which case
+  // it overrides the default one. (This is in addition to the custom builds.)
+  var leveldown = opts.db;
+
+<span class="apidocCodeCommentSpan">  /* istanbul ignore else */
+</span>  if (!leveldown) {
+    leveldown = requireLeveldown();
+
+    /* istanbul ignore if */
+    if (leveldown instanceof Error) {
+      return callback(leveldown);
+    }
+  }
+
+  var _opts = $inject_Object_assign({
+    db: leveldown,
+    migrate: migrate
+  }, opts);
+
+  LevelPouch$1.call(this, _opts, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.adapters.http" id="apidoc.module.pouchdb.adapters.http">module pouchdb.adapters.http</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.http.http" id="apidoc.element.pouchdb.adapters.http.http">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.</span>http
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function HttpPouch(opts, callback) {
+
+  // The functions that will be publicly available for HttpPouch
+  var api = this;
+
+  var host = getHost(opts.name, opts);
+  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+
+  opts = clone(opts);
+  var ajaxOpts = opts.ajax || {};
+
+  if (opts.auth || host.auth) {
+    var nAuth = opts.auth || host.auth;
+    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var token = thisBtoa(unescape(encodeURIComponent(str)));
+    ajaxOpts.headers = ajaxOpts.headers || {};
+    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+  }
+
+  // Not strictly necessary, but we do this because numerous tests
+  // rely on swapping ajax in and out.
+  api._ajax = ajax;
+
+  function ajax$$1(userOpts, options, callback) {
+    var reqAjax = userOpts.ajax || {};
+    var reqOpts = $inject_Object_assign(clone(ajaxOpts), reqAjax, options);
+    var defaultHeaders = clone(ajaxOpts.headers || {});
+    reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
+      options.headers || {});
+    log$1(reqOpts.method + &#x27; &#x27; + reqOpts.url);
+    return api._ajax(reqOpts, callback);
+  }
+
+  function ajaxPromise(userOpts, opts) {
+    return new PouchPromise$1(function (resolve, reject) {
+      ajax$$1(userOpts, opts, function (err, res$$1) {
+<span class="apidocCodeCommentSpan">        /* istanbul ignore if */
+</span>        if (err) {
+          return reject(err);
+        }
+        resolve(res$$1);
+      });
+    });
+  }
+
+  function adapterFun$$1(name, fun) {
+    return adapterFun(name, getArguments(function (args) {
+      setup().then(function () {
+        return fun.apply(this, args);
+      }).catch(function (e) {
+        var callback = args.pop();
+        callback(e);
+      });
+    }));
+  }
+
+  var setupPromise;
+
+  function setup() {
+    // TODO: Remove `skipSetup` in favor of `skip_setup` in a future release
+    if (opts.skipSetup || opts.skip_setup) {
+      return PouchPromise$1.resolve();
+    }
+
+    // If there is a setup in process or previous successful setup
+    // done then we will use that
+    // If previous setups have been rejected we will try again
+    if (setupPromise) {
+      return setupPromise;
+    }
+
+    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+        // Doesnt exist, create it
+        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
+        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+      } else {
+        return PouchPromise$1.reject(err);
+      }
+    }).catch(function (err) {
+      // If we try to create a database that already exists, skipped in
+      // istanbul since its catching a race condition.
+      /* istanbul ignore if */
+      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+        return true;
+      }
+      return PouchPromise$1.reject(err);
+    });
+
+    setupPromise.catch(function () {
+      setupPromise = null;
+    });
+
+    return setupPromise;
+  }
+
+  nextTick(function () {
+    callback(null, api);
+  });
+
+  api.type = function () {
+    return &#x27;http&#x27;;
+  };
+
+  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
+    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
+      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+      callback(null, uuid$$1);
+    });
+  });
+
+  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+    options.url = genDBUrl(host, options.url);
+    ajax$$1({}, options, callback);
+  });
+
+  // Sends a POST request to the host calling the couchdb _compact function
+  //    version: The version of CouchDB it is running
+  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
+    if (typeof opts === &#x27;function&#x27;) {
+      callback = opts;
+      opts = {};
+    }
+    opts = clone(opts);
+    ajax$$1(opts, {
+      url: genDBUrl(host, &#x27;_compact&#x27;),
+      method: &#x27;POST&#x27;
+    }, function () {
+      function ping() {
+        api.info(function (err, res$$1) {
+          if (res$$1 &#x26;&#x26; !res$$1.compact_running) {
+            callback(null, {ok: true});
+          } else {
+            setTimeout(ping, opts ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.http.valid" id="apidoc.element.pouchdb.adapters.http.valid">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.http.</span>valid
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">valid = function () {
+  return true;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.adapters.leveldb" id="apidoc.module.pouchdb.adapters.leveldb">module pouchdb.adapters.leveldb</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.leveldb.leveldb" id="apidoc.element.pouchdb.adapters.leveldb.leveldb">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.</span>leveldb
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function LevelDownPouch(opts, callback) {
+
+  // Users can pass in their own leveldown alternative here, in which case
+  // it overrides the default one. (This is in addition to the custom builds.)
+  var leveldown = opts.db;
+
+<span class="apidocCodeCommentSpan">  /* istanbul ignore else */
+</span>  if (!leveldown) {
+    leveldown = requireLeveldown();
+
+    /* istanbul ignore if */
+    if (leveldown instanceof Error) {
+      return callback(leveldown);
+    }
+  }
+
+  var _opts = $inject_Object_assign({
+    db: leveldown,
+    migrate: migrate
+  }, opts);
+
+  LevelPouch$1.call(this, _opts, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.adapters.leveldb.valid" id="apidoc.element.pouchdb.adapters.leveldb.valid">
+        function <span class="apidocSignatureSpan">pouchdb.adapters.leveldb.</span>valid
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">valid = function () {
+  return true;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.debug" id="apidoc.module.pouchdb.debug">module pouchdb.debug</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.debug" id="apidoc.element.pouchdb.debug.debug">
+        function <span class="apidocSignatureSpan">pouchdb.</span>debug
+        <span class="apidocSignatureSpan">(namespace)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createDebug(namespace) {
+
+  function debug() {
+    // disabled?
+    if (!debug.enabled) return;
+
+    var self = debug;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // turn the `arguments` into a proper Array
+    var args = new Array(arguments.length);
+    for (var i = 0; i &#x3c; args.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    args[0] = exports.coerce(args[0]);
+
+    if (&#x27;string&#x27; !== typeof args[0]) {
+      // anything else let&#x27;s inspect with %O
+      args.unshift(&#x27;%O&#x27;);
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+      // if we encounter an escaped % then don&#x27;t increase the array index
+      if (match === &#x27;%%&#x27;) return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if (&#x27;function&#x27; === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    // apply env-specific formatting (colors, etc.)
+    exports.formatArgs.call(self, args);
+
+    var logFn = debug.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+
+  debug.namespace = namespace;
+  debug.enabled = exports.enabled(namespace);
+  debug.useColors = exports.useColors();
+  debug.color = selectColor(namespace);
+
+  // env-specific initialization logic for debug instances
+  if (&#x27;function&#x27; === typeof exports.init) {
+    exports.init(debug);
+  }
+
+  return debug;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.coerce" id="apidoc.element.pouchdb.debug.coerce">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>coerce
+        <span class="apidocSignatureSpan">(val)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function coerce(val) {
+  if (val instanceof Error) return val.stack || val.message;
+  return val;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.default" id="apidoc.element.pouchdb.debug.default">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>default
+        <span class="apidocSignatureSpan">(namespace)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createDebug(namespace) {
+
+  function debug() {
+    // disabled?
+    if (!debug.enabled) return;
+
+    var self = debug;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // turn the `arguments` into a proper Array
+    var args = new Array(arguments.length);
+    for (var i = 0; i &#x3c; args.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    args[0] = exports.coerce(args[0]);
+
+    if (&#x27;string&#x27; !== typeof args[0]) {
+      // anything else let&#x27;s inspect with %O
+      args.unshift(&#x27;%O&#x27;);
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+      // if we encounter an escaped % then don&#x27;t increase the array index
+      if (match === &#x27;%%&#x27;) return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if (&#x27;function&#x27; === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    // apply env-specific formatting (colors, etc.)
+    exports.formatArgs.call(self, args);
+
+    var logFn = debug.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+
+  debug.namespace = namespace;
+  debug.enabled = exports.enabled(namespace);
+  debug.useColors = exports.useColors();
+  debug.color = selectColor(namespace);
+
+  // env-specific initialization logic for debug instances
+  if (&#x27;function&#x27; === typeof exports.init) {
+    exports.init(debug);
+  }
+
+  return debug;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.disable" id="apidoc.element.pouchdb.debug.disable">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>disable
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function disable() {
+  exports.enable(&#x27;&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.enable" id="apidoc.element.pouchdb.debug.enable">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>enable
+        <span class="apidocSignatureSpan">(namespaces)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function enable(namespaces) {
+  exports.save(namespaces);
+
+  var split = (namespaces || &#x27;&#x27;).split(/[\s,]+/);
+  var len = split.length;
+
+  for (var i = 0; i &#x3c; len; i++) {
+    if (!split[i]) continue; // ignore empty strings
+    namespaces = split[i].replace(/\*/g, &#x27;.*?&#x27;);
+    if (namespaces[0] === &#x27;-&#x27;) {
+      exports.skips.push(new RegExp(&#x27;^&#x27; + namespaces.substr(1) + &#x27;$&#x27;));
+    } else {
+      exports.names.push(new RegExp(&#x27;^&#x27; + namespaces + &#x27;$&#x27;));
+    }
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.enabled" id="apidoc.element.pouchdb.debug.enabled">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>enabled
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function enabled(name) {
+  var i, len;
+  for (i = 0, len = exports.skips.length; i &#x3c; len; i++) {
+    if (exports.skips[i].test(name)) {
+      return false;
+    }
+  }
+  for (i = 0, len = exports.names.length; i &#x3c; len; i++) {
+    if (exports.names[i].test(name)) {
+      return true;
+    }
+  }
+  return false;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.formatArgs" id="apidoc.element.pouchdb.debug.formatArgs">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>formatArgs
+        <span class="apidocSignatureSpan">(args)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function formatArgs(args) {
+  var name = this.namespace;
+  var useColors = this.useColors;
+
+  if (useColors) {
+    var c = this.color;
+    var prefix = &#x27;  \u001b[3&#x27; + c + &#x27;;1m&#x27; + name + &#x27; &#x27; + &#x27;\u001b[0m&#x27;;
+
+    args[0] = prefix + args[0].split(&#x27;\n&#x27;).join(&#x27;\n&#x27; + prefix);
+    args.push(&#x27;\u001b[3&#x27; + c + &#x27;m+&#x27; + exports.humanize(this.diff) + &#x27;\u001b[0m&#x27;);
+  } else {
+    args[0] = new Date().toUTCString()
+      + &#x27; &#x27; + name + &#x27; &#x27; + args[0];
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.humanize" id="apidoc.element.pouchdb.debug.humanize">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>humanize
+        <span class="apidocSignatureSpan">(val, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">humanize = function (val, options) {
+  options = options || {}
+  var type = typeof val
+  if (type === &#x27;string&#x27; &#x26;&#x26; val.length &#x3e; 0) {
+    return parse(val)
+  } else if (type === &#x27;number&#x27; &#x26;&#x26; isNaN(val) === false) {
+    return options.long ?
+			fmtLong(val) :
+			fmtShort(val)
+  }
+  throw new Error(&#x27;val is not a non-empty string or a valid number. val=&#x27; + JSON.stringify(val))
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.init" id="apidoc.element.pouchdb.debug.init">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>init
+        <span class="apidocSignatureSpan">(debug)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function init(debug) {
+  debug.inspectOpts = util._extend({}, exports.inspectOpts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.load" id="apidoc.element.pouchdb.debug.load">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>load
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function load() {
+  return process.env.DEBUG;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.log" id="apidoc.element.pouchdb.debug.log">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>log
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function log() {
+  return stream.write(util.format.apply(util, arguments) + &#x27;\n&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.save" id="apidoc.element.pouchdb.debug.save">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>save
+        <span class="apidocSignatureSpan">(namespaces)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function save(namespaces) {
+  if (null == namespaces) {
+    // If you set a process.env field to null or undefined, it gets cast to the
+    // string &#x27;null&#x27; or &#x27;undefined&#x27;. Just delete instead.
+    delete process.env.DEBUG;
+  } else {
+    process.env.DEBUG = namespaces;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.useColors" id="apidoc.element.pouchdb.debug.useColors">
+        function <span class="apidocSignatureSpan">pouchdb.debug.</span>useColors
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function useColors() {
+  return &#x27;colors&#x27; in exports.inspectOpts
+    ? Boolean(exports.inspectOpts.colors)
+    : tty.isatty(fd);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.debug.formatters" id="apidoc.module.pouchdb.debug.formatters">module pouchdb.debug.formatters</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.formatters.O" id="apidoc.element.pouchdb.debug.formatters.O">
+        function <span class="apidocSignatureSpan">pouchdb.debug.formatters.</span>O
+        <span class="apidocSignatureSpan">(v)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">O = function (v) {
+  this.inspectOpts.colors = this.useColors;
+  return util.inspect(v, this.inspectOpts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.debug.formatters.o" id="apidoc.element.pouchdb.debug.formatters.o">
+        function <span class="apidocSignatureSpan">pouchdb.debug.formatters.</span>o
+        <span class="apidocSignatureSpan">(v)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">o = function (v) {
+  this.inspectOpts.colors = this.useColors;
+  return util.inspect(v, this.inspectOpts)
+    .replace(/\s*\n\s*/g, &#x27; &#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.super_" id="apidoc.module.pouchdb.super_">module pouchdb.super_</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.super_" id="apidoc.element.pouchdb.super_.super_">
+        function <span class="apidocSignatureSpan">pouchdb.</span>super_
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pouchdb.super_.prototype" id="apidoc.module.pouchdb.super_.prototype">module pouchdb.super_.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype._compact" id="apidoc.element.pouchdb.super_.prototype._compact">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>_compact
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_compact = function (opts, callback) {
+  var self = this;
+  var changesOpts = {
+    return_docs: false,
+    last_seq: opts.last_seq || 0
+  };
+  var promises = [];
+
+  function onChange(row) {
+    promises.push(self.compactDocument(row.id, 0));
+  }
+  function onComplete(resp) {
+    var lastSeq = resp.last_seq;
+    PouchPromise$1.all(promises).then(function () {
+      return upsert(self, &#x27;_local/compaction&#x27;, function deltaFunc(doc) {
+        if (!doc.last_seq || doc.last_seq &#x3c; lastSeq) {
+          doc.last_seq = lastSeq;
+          return doc;
+        }
+        return false; // somebody else got here first, don&#x27;t update
+      });
+    }).then(function () {
+      callback(null, {ok: true});
+    }).catch(callback);
+  }
+  self.changes(changesOpts)
+    .on(&#x27;change&#x27;, onChange)
+    .on(&#x27;complete&#x27;, onComplete)
+    .on(&#x27;error&#x27;, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.allDocs" id="apidoc.element.pouchdb.super_.prototype.allDocs">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>allDocs
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">allDocs = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.bulkDocs" id="apidoc.element.pouchdb.super_.prototype.bulkDocs">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>bulkDocs
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">bulkDocs = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.bulkGet" id="apidoc.element.pouchdb.super_.prototype.bulkGet">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>bulkGet
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">bulkGet = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.changes" id="apidoc.element.pouchdb.super_.prototype.changes">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>changes
+        <span class="apidocSignatureSpan">(opts, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">changes = function (opts, callback) {
+  if (typeof opts === &#x27;function&#x27;) {
+    callback = opts;
+    opts = {};
+  }
+  return new Changes$2(this, opts, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.close" id="apidoc.element.pouchdb.super_.prototype.close">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>close
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">close = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.compact" id="apidoc.element.pouchdb.super_.prototype.compact">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>compact
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compact = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.compactDocument" id="apidoc.element.pouchdb.super_.prototype.compactDocument">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>compactDocument
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compactDocument = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.destroy" id="apidoc.element.pouchdb.super_.prototype.destroy">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>destroy
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">destroy = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.get" id="apidoc.element.pouchdb.super_.prototype.get">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>get
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">get = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.getAttachment" id="apidoc.element.pouchdb.super_.prototype.getAttachment">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>getAttachment
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getAttachment = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.id" id="apidoc.element.pouchdb.super_.prototype.id">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>id
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">id = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.info" id="apidoc.element.pouchdb.super_.prototype.info">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>info
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">info = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.post" id="apidoc.element.pouchdb.super_.prototype.post">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>post
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">post = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.put" id="apidoc.element.pouchdb.super_.prototype.put">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>put
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">put = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.putAttachment" id="apidoc.element.pouchdb.super_.prototype.putAttachment">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>putAttachment
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">putAttachment = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.registerDependentDatabase" id="apidoc.element.pouchdb.super_.prototype.registerDependentDatabase">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>registerDependentDatabase
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">registerDependentDatabase = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.remove" id="apidoc.element.pouchdb.super_.prototype.remove">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>remove
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">remove = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.removeAttachment" id="apidoc.element.pouchdb.super_.prototype.removeAttachment">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>removeAttachment
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">removeAttachment = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.revsDiff" id="apidoc.element.pouchdb.super_.prototype.revsDiff">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>revsDiff
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">revsDiff = function () {
+  var len = arguments.length;
+  if (len) {
+    var args = [];
+    var i = -1;
+    while (++i &#x3c; len) {
+      args[i] = arguments[i];
+    }
+    return fun.call(this, args);
+  } else {
+    return fun.call(this, []);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pouchdb.super_.prototype.type" id="apidoc.element.pouchdb.super_.prototype.type">
+        function <span class="apidocSignatureSpan">pouchdb.super_.prototype.</span>type
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">type = function () {
+  return (typeof this._type === &#x27;function&#x27;) ? this._type() : this.adapter;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
