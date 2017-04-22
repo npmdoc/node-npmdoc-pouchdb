@@ -1,1 +1,38 @@
-{     "devDependencies": {         "electron-lite": "kaizhu256/node-electron-lite#alpha",         "utility2": "kaizhu256/node-utility2#alpha"     },     "name":"npmdoc-pouchdb",     "homepage": "https://github.com/npmdoc/node-npmdoc-pouchdb",     "repository": {         "type": "git",         "url": "https://github.com/npmdoc/node-npmdoc-pouchdb.git"     },     "scripts": {         "build-ci": "utility2 shReadmeTest build_ci.sh"     },     "version": "0.0.1" }
+{
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "description": "#### api documentation for  [pouchdb (v6.2.0)](https://github.com/pouchdb/pouchdb#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-pouchdb.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-pouchdb) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-pouchdb.svg)](https://travis-ci.org/npmdoc/node-npmdoc-pouchdb)",
+    "devDependencies": {
+        "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "utility2": "kaizhu256/node-utility2#alpha"
+    },
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmdoc/node-npmdoc-pouchdb",
+    "keywords": [
+        "documentation",
+        "pouchdb"
+    ],
+    "license": "MIT",
+    "main": "lib.npmdoc_pouchdb.js",
+    "name": "npmdoc-pouchdb",
+    "nameAlias": "npmdoc_pouchdb",
+    "nameOriginal": "npmdoc-pouchdb",
+    "os": [
+        "darwin",
+        "linux"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/npmdoc/node-npmdoc-pouchdb.git"
+    },
+    "scripts": {
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "npm install \"kaizhu256/node-utility2#alpha\" && utility2 shDeployHeroku",
+        "postinstall": "[ ! -f npm_scripts.sh ] || ./npm_scripts.sh postinstall",
+        "start": "PORT=${PORT:-8080} utility2 start test.js",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
+    },
+    "version": "2017.4.23"
+}
