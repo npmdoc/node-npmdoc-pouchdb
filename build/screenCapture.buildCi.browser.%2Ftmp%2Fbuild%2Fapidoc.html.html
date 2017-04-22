@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/pouchdb/pouchdb#readme"
-
-    >pouchdb (v6.2.0)</a>
+    <a href="https://github.com/pouchdb/pouchdb#readme">pouchdb (v6.2.0)</a>
 </h1>
 <h4>PouchDB is a pocket-sized database</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.pouchdb">module pouchdb</a><ol>
 
@@ -1373,7 +1366,7 @@
   var self = this;
   opts = opts || {};
 
-  if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+  if (name &amp;&amp; typeof name === 'object') {
     opts = name;
     name = opts.name;
     delete opts.name;
@@ -1384,11 +1377,11 @@
   self.auto_compaction = opts.auto_compaction;
   self.prefix = PouchDB$5.prefix;
 
-  if (typeof name !== &#x27;string&#x27;) {
-    throw new Error(&#x27;Missing/invalid DB name&#x27;);
+  if (typeof name !== 'string') {
+    throw new Error('Missing/invalid DB name');
   }
 
-  var prefixedName = (opts.prefix || &#x27;&#x27;) + name;
+  var prefixedName = (opts.prefix || '') + name;
   var backend = parseAdapter(prefixedName, opts);
 
   opts.name = backend.name;
@@ -1396,11 +1389,11 @@
 
   self.name = name;
   self._adapter = opts.adapter;
-  PouchDB$5.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+  PouchDB$5.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
   if (!PouchDB$5.adapters[opts.adapter] ||
       !PouchDB$5.adapters[opts.adapter].valid()) {
-    throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+    throw new Error('Invalid Adapter: ' + opts.adapter);
   }
 
   AbstractPouchDB.call(self);
@@ -1414,8 +1407,8 @@
     }
     prepareForDestruction(self);
 
-    self.emit(&#x27;created&#x27;, self);
-    PouchDB$5.emit(&#x27;created&#x27;, self.name);
+    self.emit('created', self);
+    PouchDB$5.emit('created', self.name);
     self.taskqueue.ready(self);
   });
 
@@ -1449,7 +1442,7 @@
 }
 
 var IDBPouch = function (PouchDB) {
-  PouchDB.<span class="apidocCodeKeywordSpan">adapter</span>(&#x27;idb&#x27;, IdbPouch, true);
+  PouchDB.<span class="apidocCodeKeywordSpan">adapter</span>('idb', IdbPouch, true);
 };
 
 //
@@ -1475,17 +1468,17 @@ var IDBPouch = function (PouchDB) {
   var api = this;
 
   var host = getHost(opts.name, opts);
-  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+  var dbUrl = genDBUrl(host, '');
 
   opts = clone(opts);
   var ajaxOpts = opts.ajax || {};
 
   if (opts.auth || host.auth) {
     var nAuth = opts.auth || host.auth;
-    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var str = nAuth.username + ':' + nAuth.password;
     var token = thisBtoa(unescape(encodeURIComponent(str)));
     ajaxOpts.headers = ajaxOpts.headers || {};
-    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+    ajaxOpts.headers.Authorization = 'Basic ' + token;
   }
 
   // Not strictly necessary, but we do this because numerous tests
@@ -1499,8 +1492,8 @@ var IDBPouch = function (PouchDB) {
     reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
       options.headers || {});
 <span class="apidocCodeCommentSpan">    /* istanbul ignore if */
-</span>    if (api.constructor.listeners(&#x27;debug&#x27;).length) {
-      api.constructor.emit(&#x27;debug&#x27;, [&#x27;http&#x27;, reqOpts.method, reqOpts.url]);
+</span>    if (api.constructor.listeners('debug').length) {
+      api.constructor.emit('debug', ['http', reqOpts.method, reqOpts.url]);
     }
     return api._ajax(reqOpts, callback);
   }
@@ -1543,12 +1536,12 @@ var IDBPouch = function (PouchDB) {
       return setupPromise;
     }
 
-    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    var checkExists = {method: 'GET', url: dbUrl};
     setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 404) {
         // Doesnt exist, create it
-        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
-        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+        res(404, 'PouchDB is just detecting if the remote exists.');
+        return ajaxPromise({}, {method: 'PUT', url: dbUrl});
       } else {
         return PouchPromise$1.reject(err);
       }
@@ -1556,7 +1549,7 @@ var IDBPouch = function (PouchDB) {
       // If we try to create a database that already exists, skipped in
       // istanbul since its catching a race condition.
       /* istanbul ignore if */
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 412) {
         return true;
       }
       return PouchPromise$1.reject(err);
@@ -1576,33 +1569,33 @@ var IDBPouch = function (PouchDB) {
   api._remote = true;
   /* istanbul ignore next */
   api.type = function () {
-    return &#x27;http&#x27;;
+    return 'http';
   };
 
-  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
-    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
-      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
-        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+  api.id = adapterFun$$1('id', function (callback) {
+    ajax$$1({}, {method: 'GET', url: genUrl(host, '')}, function (err, result) {
+      var uuid$$1 = (result &amp;&amp; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, '');
       callback(null, uuid$$1);
     });
   });
 
-  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+  api.request = adapterFun$$1('request', function (options, callback) {
     options.url = genDBUrl(host, options.url);
     ajax$$1({}, options, callback);
   });
 
   // Sends a POST request to the host calling the couchdb _compact function
   //    version: The version of CouchDB it is running
-  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
-    if (typeof opts === &#x27;function&#x27;) {
+  api.compact = adapterFun$$1('compact', function (opts, callback) {
+    if (typeof opts === 'function') {
       callback = opts;
       opts = {};
     }
     opts = clone(opts);
     ajax$$1(opts, {
-      url: genDBUrl(host, &#x27;_compact&#x27;),
-      method: &#x27;POST&#x27;
+      url: genDBUrl(host, '_compact'),
+      method: 'POST'
     }, function () {
       function ping() {
         api.info( ...</pre></li>
@@ -1663,7 +1656,7 @@ inherits(Changes, events.EventEmitter);
 function attachBrowserEvents(self) {
 if (isChromeApp()) {
   chrome.storage.onChanged.<span class="apidocCodeKeywordSpan">addListener</span>(function (e) {
-    // make sure it&#x27;s event addressed to us
+    // make sure it's event addressed to us
     if (e.db_name != null) {
       //object only has oldValue, newValue members
       self.emit(e.dbName.newValue);
@@ -1700,29 +1693,29 @@ if (isChromeApp()) {
 
     // turn the `arguments` into a proper Array
     var args = new Array(arguments.length);
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       args[i] = arguments[i];
     }
 
     args[0] = exports.coerce(args[0]);
 
-    if (&#x27;string&#x27; !== typeof args[0]) {
-      // anything else let&#x27;s inspect with %O
-      args.unshift(&#x27;%O&#x27;);
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
     }
 
     // apply any `formatters` transformations
     var index = 0;
     args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don&#x27;t increase the array index
-      if (match === &#x27;%%&#x27;) return match;
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
       index++;
       var formatter = exports.formatters[format];
-      if (&#x27;function&#x27; === typeof formatter) {
+      if ('function' === typeof formatter) {
         var val = args[index];
         match = formatter.call(self, val);
 
-        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        // now we need to remove `args[index]` since it's inlined in the `format`
         args.splice(index, 1);
         index--;
       }
@@ -1742,7 +1735,7 @@ if (isChromeApp()) {
   debug.color = selectColor(namespace);
 
   // env-specific initialization logic for debug instances
-  if (&#x27;function&#x27; === typeof exports.init) {
+  if ('function' === typeof exports.init) {
     exports.init(debug);
   }
 
@@ -1768,7 +1761,7 @@ if (isChromeApp()) {
 
     opts = opts || {};
 
-    if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+    if (name &amp;&amp; typeof name === 'object') {
       opts = name;
       name = opts.name;
       delete opts.name;
@@ -1809,19 +1802,19 @@ if (isChromeApp()) {
     <li>example usage<pre class="apidocCodePre">...
 function logApiCall(self, name, args) {
   /* istanbul ignore if */
-  if (self.constructor.listeners(&#x27;debug&#x27;).length) {
-var logArgs = [&#x27;api&#x27;, self.name, name];
-for (var i = 0; i &#x3c; args.length - 1; i++) {
+  if (self.constructor.listeners('debug').length) {
+var logArgs = ['api', self.name, name];
+for (var i = 0; i &lt; args.length - 1; i++) {
   logArgs.push(args[i]);
 }
-self.constructor.<span class="apidocCodeKeywordSpan">emit</span>(&#x27;debug&#x27;, logArgs);
+self.constructor.<span class="apidocCodeKeywordSpan">emit</span>('debug', logArgs);
 
 // override the callback itself to log the response
 var origCallback = args[args.length - 1];
 args[args.length - 1] = function (err, res) {
-  var responseArgs = [&#x27;api&#x27;, self.name, name];
+  var responseArgs = ['api', self.name, name];
   responseArgs = responseArgs.concat(
-    err ? [&#x27;error&#x27;, err] : [&#x27;success&#x27;, res]
+    err ? ['error', err] : ['success', res]
 ...</pre></li>
     </ul>
 
@@ -1870,7 +1863,7 @@ args[args.length - 1] = function (err, res) {
   var self = this;
   opts = opts || {};
 
-  if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+  if (name &amp;&amp; typeof name === 'object') {
     opts = name;
     name = opts.name;
     delete opts.name;
@@ -1881,11 +1874,11 @@ args[args.length - 1] = function (err, res) {
   self.auto_compaction = opts.auto_compaction;
   self.prefix = PouchDB$5.prefix;
 
-  if (typeof name !== &#x27;string&#x27;) {
-    throw new Error(&#x27;Missing/invalid DB name&#x27;);
+  if (typeof name !== 'string') {
+    throw new Error('Missing/invalid DB name');
   }
 
-  var prefixedName = (opts.prefix || &#x27;&#x27;) + name;
+  var prefixedName = (opts.prefix || '') + name;
   var backend = parseAdapter(prefixedName, opts);
 
   opts.name = backend.name;
@@ -1893,11 +1886,11 @@ args[args.length - 1] = function (err, res) {
 
   self.name = name;
   self._adapter = opts.adapter;
-  PouchDB$5.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+  PouchDB$5.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
   if (!PouchDB$5.adapters[opts.adapter] ||
       !PouchDB$5.adapters[opts.adapter].valid()) {
-    throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+    throw new Error('Invalid Adapter: ' + opts.adapter);
   }
 
   AbstractPouchDB.call(self);
@@ -1911,8 +1904,8 @@ args[args.length - 1] = function (err, res) {
     }
     prepareForDestruction(self);
 
-    self.emit(&#x27;created&#x27;, self);
-    PouchDB$5.emit(&#x27;created&#x27;, self.name);
+    self.emit('created', self);
+    PouchDB$5.emit('created', self.name);
     self.taskqueue.ready(self);
   });
 
@@ -1931,14 +1924,14 @@ args[args.length - 1] = function (err, res) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  return db.type() === &#x27;http&#x27;;
+  return db.type() === 'http';
 }
 /* istanbul ignore next */
 return false;
 }
 
 function listenerCount(ee, type) {
-return &#x27;listenerCount&#x27; in ee ? ee.<span class="apidocCodeKeywordSpan">listenerCount</span>(type) :
+return 'listenerCount' in ee ? ee.<span class="apidocCodeKeywordSpan">listenerCount</span>(type) :
                                events.EventEmitter.listenerCount(ee, type);
 }
 
@@ -1967,12 +1960,12 @@ return promise;
 
 function logApiCall(self, name, args) {
   /* istanbul ignore if */
-  if (self.constructor.<span class="apidocCodeKeywordSpan">listeners</span>(&#x27;debug&#x27;).length) {
-var logArgs = [&#x27;api&#x27;, self.name, name];
-for (var i = 0; i &#x3c; args.length - 1; i++) {
+  if (self.constructor.<span class="apidocCodeKeywordSpan">listeners</span>('debug').length) {
+var logArgs = ['api', self.name, name];
+for (var i = 0; i &lt; args.length - 1; i++) {
   logArgs.push(args[i]);
 }
-self.constructor.emit(&#x27;debug&#x27;, logArgs);
+self.constructor.emit('debug', logArgs);
 
 // override the callback itself to log the response
 ...</pre></li>
@@ -1997,7 +1990,7 @@ self.constructor.emit(&#x27;debug&#x27;, logArgs);
   var self = this;
   opts = opts || {};
 
-  if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+  if (name &amp;&amp; typeof name === 'object') {
     opts = name;
     name = opts.name;
     delete opts.name;
@@ -2008,11 +2001,11 @@ self.constructor.emit(&#x27;debug&#x27;, logArgs);
   self.auto_compaction = opts.auto_compaction;
   self.prefix = PouchDB$2.prefix;
 
-  if (typeof name !== &#x27;string&#x27;) {
-    throw new Error(&#x27;Missing/invalid DB name&#x27;);
+  if (typeof name !== 'string') {
+    throw new Error('Missing/invalid DB name');
   }
 
-  var prefixedName = (opts.prefix || &#x27;&#x27;) + name;
+  var prefixedName = (opts.prefix || '') + name;
   var backend = parseAdapter(prefixedName, opts);
 
   opts.name = backend.name;
@@ -2020,11 +2013,11 @@ self.constructor.emit(&#x27;debug&#x27;, logArgs);
 
   self.name = name;
   self._adapter = opts.adapter;
-  PouchDB$2.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+  PouchDB$2.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
   if (!PouchDB$2.adapters[opts.adapter] ||
       !PouchDB$2.adapters[opts.adapter].valid()) {
-    throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+    throw new Error('Invalid Adapter: ' + opts.adapter);
   }
 
   AbstractPouchDB.call(self);
@@ -2038,8 +2031,8 @@ self.constructor.emit(&#x27;debug&#x27;, logArgs);
     }
     prepareForDestruction(self);
 
-    self.emit(&#x27;created&#x27;, self);
-    PouchDB$2.emit(&#x27;created&#x27;, self.name);
+    self.emit('created', self);
+    PouchDB$2.emit('created', self.name);
     self.taskqueue.ready(self);
   });
 
@@ -2065,13 +2058,13 @@ function onError() {
   inprogress = false;
 }
 
-db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>(&#x27;change&#x27;, function (c) {
-  if (c.seq &#x3e; opts.since &#x26;&#x26; !opts.cancelled) {
+db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>('change', function (c) {
+  if (c.seq &gt; opts.since &amp;&amp; !opts.cancelled) {
     opts.since = c.seq;
     opts.onChange(c);
   }
-}).on(&#x27;complete&#x27;, function () {
-  if (inprogress === &#x27;waiting&#x27;) {
+}).on('complete', function () {
+  if (inprogress === 'waiting') {
     nextTick(eventFunction);
 ...</pre></li>
     </ul>
@@ -2089,12 +2082,12 @@ db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>(&#x27;chan
     <li>example usage<pre class="apidocCodePre">...
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 }
 function onDestroy() {
   self.cancel();
 }
-db.<span class="apidocCodeKeywordSpan">once</span>(&#x27;destroyed&#x27;, onDestroy);
+db.<span class="apidocCodeKeywordSpan">once</span>('destroyed', onDestroy);
 
 opts.onChange = function (change) {
   /* istanbul ignore if */
@@ -2115,10 +2108,10 @@ opts.onChange = function (change) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">plugin = function (obj$$1) {
-  if (typeof obj$$1 === &#x27;function&#x27;) { // function style for plugins
+  if (typeof obj$$1 === 'function') { // function style for plugins
     obj$$1(PouchDB$5);
-  } else if (typeof obj$$1 !== &#x27;object&#x27; || Object.keys(obj$$1).length === 0) {
-    throw new Error(&#x27;Invalid plugin: got \&#x22;&#x27; + obj$$1 + &#x27;\&#x22;, expected an object or a function&#x27;);
+  } else if (typeof obj$$1 !== 'object' || Object.keys(obj$$1).length === 0) {
+    throw new Error('Invalid plugin: got \"' + obj$$1 + '\", expected an object or a function');
   } else {
     Object.keys(obj$$1).forEach(function (id) { // object style for plugins
       PouchDB$5.prototype[id] = obj$$1[id];
@@ -2186,20 +2179,20 @@ function toObject(array) {
     <li>description and source-code<pre class="apidocCodePre">removeAllListeners = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   if (err) {
-    if (listenerCount(self, &#x27;error&#x27;) &#x3e; 0) {
-      self.emit(&#x27;error&#x27;, err);
+    if (listenerCount(self, 'error') &gt; 0) {
+      self.emit('error', err);
     }
   } else {
-    self.emit(&#x27;complete&#x27;, resp);
+    self.emit('complete', resp);
   }
   self.<span class="apidocCodeKeywordSpan">removeAllListeners</span>();
-  db.removeListener(&#x27;destroyed&#x27;, onDestroy);
+  db.removeListener('destroyed', onDestroy);
 });
 if (callback) {
-  self.on(&#x27;complete&#x27;, function (resp) {
+  self.on('complete', function (resp) {
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 ...</pre></li>
     </ul>
 
@@ -2214,20 +2207,20 @@ if (callback) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeListener = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    if (listenerCount(self, &#x27;error&#x27;) &#x3e; 0) {
-      self.emit(&#x27;error&#x27;, err);
+    if (listenerCount(self, 'error') &gt; 0) {
+      self.emit('error', err);
     }
   } else {
-    self.emit(&#x27;complete&#x27;, resp);
+    self.emit('complete', resp);
   }
   self.removeAllListeners();
-  db.<span class="apidocCodeKeywordSpan">removeListener</span>(&#x27;destroyed&#x27;, onDestroy);
+  db.<span class="apidocCodeKeywordSpan">removeListener</span>('destroyed', onDestroy);
 });
 if (callback) {
-  self.on(&#x27;complete&#x27;, function (resp) {
+  self.on('complete', function (resp) {
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 }
 ...</pre></li>
     </ul>
@@ -2243,23 +2236,23 @@ if (callback) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function replicateWrapper(src, target, opts, callback) {
 
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (typeof opts === &#x27;undefined&#x27;) {
+  if (typeof opts === 'undefined') {
     opts = {};
   }
 
-  if (opts.doc_ids &#x26;&#x26; !Array.isArray(opts.doc_ids)) {
+  if (opts.doc_ids &amp;&amp; !Array.isArray(opts.doc_ids)) {
     throw createError(BAD_REQUEST,
-                       &#x22;`doc_ids` filter parameter is not a list.&#x22;);
+                       "`doc_ids` filter parameter is not a list.");
   }
 
   opts.complete = callback;
   opts = clone(opts);
   opts.continuous = opts.continuous || opts.live;
-  opts.retry = (&#x27;retry&#x27; in opts) ? opts.retry : false;
+  opts.retry = ('retry' in opts) ? opts.retry : false;
 <span class="apidocCodeCommentSpan">  /*jshint validthis:true */
 </span>  opts.PouchConstructor = opts.PouchConstructor || this;
   var replicateRet = new Replication(opts);
@@ -2271,7 +2264,7 @@ if (callback) {
     <li>example usage<pre class="apidocCodePre">...
 PouchDB.sync = sync$1;
 
-Object.defineProperty(PouchDB.prototype, &#x27;replicate&#x27;, {
+Object.defineProperty(PouchDB.prototype, 'replicate', {
   get: function () {
     var self = this;
     return {
@@ -2325,11 +2318,11 @@ Object.defineProperty(PouchDB.prototype, &#x27;replicate&#x27;, {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function sync$1(src, target, opts, callback) {
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (typeof opts === &#x27;undefined&#x27;) {
+  if (typeof opts === 'undefined') {
     opts = {};
   }
   opts = clone(opts);
@@ -2394,29 +2387,29 @@ PouchDB$5.plugin(IDBPouch)
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function filter(changesHandler$$1, opts) {
   var callback = opts.complete;
-  if (opts.filter === &#x27;_view&#x27;) {
-    if (!opts.view || typeof opts.view !== &#x27;string&#x27;) {
+  if (opts.filter === '_view') {
+    if (!opts.view || typeof opts.view !== 'string') {
       var err = createError(BAD_REQUEST,
-        &#x27;`view` filter parameter not found or invalid.&#x27;);
+        '`view` filter parameter not found or invalid.');
       return callback(err);
     }
     // fetch a view from a design doc, make it behave like a filter
     var viewName = parseDesignDocFunctionName(opts.view);
-    changesHandler$$1.db.get(&#x27;_design/&#x27; + viewName[0], function (err, ddoc) {
+    changesHandler$$1.db.get('_design/' + viewName[0], function (err, ddoc) {
 <span class="apidocCodeCommentSpan">      /* istanbul ignore if */
 </span>      if (changesHandler$$1.isCancelled) {
-        return callback(null, {status: &#x27;cancelled&#x27;});
+        return callback(null, {status: 'cancelled'});
       }
       /* istanbul ignore next */
       if (err) {
         return callback(generateErrorFromResponse(err));
       }
-      var mapFun = ddoc &#x26;&#x26; ddoc.views &#x26;&#x26; ddoc.views[viewName[1]] &#x26;&#x26;
+      var mapFun = ddoc &amp;&amp; ddoc.views &amp;&amp; ddoc.views[viewName[1]] &amp;&amp;
         ddoc.views[viewName[1]].map;
       if (!mapFun) {
         return callback(createError(MISSING_DOC,
-          (ddoc.views ? &#x27;missing json key: &#x27; + viewName[1] :
-            &#x27;missing json key: views&#x27;)));
+          (ddoc.views ? 'missing json key: ' + viewName[1] :
+            'missing json key: views')));
       }
       opts.filter = evalView(mapFun);
       changesHandler$$1.doChanges(opts);
@@ -2429,20 +2422,20 @@ PouchDB$5.plugin(IDBPouch)
   } else {
     // fetch a filter from a design doc
     var filterName = parseDesignDocFunctionName(opts.filter);
-    changesHandler$$1.db.get(&#x27;_design/&#x27; + filterName[0], function (err, ddoc) {
+    changesHandler$$1.db.get('_design/' + filterName[0], function (err, ddoc) {
       /* istanbul ignore if */
       if (changesHandler$$1.isCancelled) {
-        return callback(null, {status: &#x27;cancelled&#x27;});
+        return callback(null, {status: 'cancelled'});
       }
       /* istanbul ignore next */
       if (err) {
         return callback(generateErrorFromResponse(err));
       }
-      var filterFun = ddoc &#x26;&#x26; ddoc.filters &#x26;&#x26; ddoc.filters[filterName[1]];
+      var filterFun = ddoc &amp;&amp; ddoc.filters &amp;&amp; ddoc.filters[filterName[1]];
       if (!filterFun) {
         return callback(createError(MISSING_DOC,
-          ((ddoc &#x26;&#x26; ddoc.filters) ? &#x27;missing json key: &#x27; + filterName[1]
-            : &#x27;missing json key: filters&#x27;)));
+          ((ddoc &amp;&amp; ddoc.filters) ? 'missing json key: ' + filterName[1]
+            : 'missing json key: filters')));
       }
       opts.filter = evalFilter(filterFun);
       changesHandler$$1.doChanges(opts);
@@ -2450,7 +2443,7 @@ PouchDB$5.plugin(IDBPouch)
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-      var docOpts = pick(docRequests[0], [&#x27;atts_since&#x27;, &#x27;attachments&#x27;]);
+      var docOpts = pick(docRequests[0], ['atts_since', 'attachments']);
       docOpts.open_revs = docRequests.map(function (request) {
 // rev is optional, open_revs disallowed
 return request.rev;
@@ -2464,7 +2457,7 @@ return request.rev;
       if (docOpts.open_revs.length === 0) {
 delete docOpts.open_revs;
 
-// when fetching only the &#x22;winning&#x22; leaf,
+// when fetching only the "winning" leaf,
 ...</pre></li>
     </ul>
 
@@ -2478,16 +2471,16 @@ delete docOpts.open_revs;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function normalize(opts) {
-  if (opts.view &#x26;&#x26; !opts.filter) {
-    opts.filter = &#x27;_view&#x27;;
+  if (opts.view &amp;&amp; !opts.filter) {
+    opts.filter = '_view';
   }
 
-  if (opts.selector &#x26;&#x26; !opts.filter) {
-    opts.filter = &#x27;_selector&#x27;;
+  if (opts.selector &amp;&amp; !opts.filter) {
+    opts.filter = '_selector';
   }
 
-  if (opts.filter &#x26;&#x26; typeof opts.filter === &#x27;string&#x27;) {
-    if (opts.filter === &#x27;_view&#x27;) {
+  if (opts.filter &amp;&amp; typeof opts.filter === 'string') {
+    if (opts.filter === '_view') {
       opts.view = normalizeDesignDocFunctionName(opts.view);
     } else {
       opts.filter = normalizeDesignDocFunctionName(opts.filter);
@@ -2507,9 +2500,9 @@ if (PouchDB$5._changesFilterPlugin) {
     return PouchDB$5._changesFilterPlugin.filter(this, opts);
   }
 } else {
-  [&#x27;doc_ids&#x27;, &#x27;filter&#x27;, &#x27;selector&#x27;, &#x27;view&#x27;].forEach(function (key) {
+  ['doc_ids', 'filter', 'selector', 'view'].forEach(function (key) {
     if (key in opts) {
-      guardedConsole(&#x27;warn&#x27;,
+      guardedConsole('warn',
 ...</pre></li>
     </ul>
 
@@ -2523,8 +2516,8 @@ if (PouchDB$5._changesFilterPlugin) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function shouldFilter(changesHandler$$1, opts) {
-  return opts.filter &#x26;&#x26; typeof opts.filter === &#x27;string&#x27; &#x26;&#x26;
-    !opts.doc_ids &#x26;&#x26; !isRemote(changesHandler$$1.db);
+  return opts.filter &amp;&amp; typeof opts.filter === 'string' &amp;&amp;
+    !opts.doc_ids &amp;&amp; !isRemote(changesHandler$$1.db);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   }, callback);
@@ -2538,10 +2531,10 @@ if (PouchDB$5._changesFilterPlugin) {
     return PouchDB$5._changesFilterPlugin.filter(this, opts);
   }
 } else {
-  [&#x27;doc_ids&#x27;, &#x27;filter&#x27;, &#x27;selector&#x27;, &#x27;view&#x27;].forEach(function (key) {
+  ['doc_ids', 'filter', 'selector', 'view'].forEach(function (key) {
     if (key in opts) {
-      guardedConsole(&#x27;warn&#x27;,
-        &#x27;The &#x22;&#x27; + key + &#x27;&#x22; option was passed in to changes/replicate, &#x27; +
+      guardedConsole('warn',
+        'The "' + key + '" option was passed in to changes/replicate, ' +
 ...</pre></li>
     </ul>
 
@@ -2556,10 +2549,10 @@ if (PouchDB$5._changesFilterPlugin) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function validate(opts, callback) {
   if (opts.selector) {
-    if (opts.filter &#x26;&#x26; opts.filter !== &#x27;_selector&#x27;) {
-      var filterName = typeof opts.filter === &#x27;string&#x27; ?
-        opts.filter : &#x27;function&#x27;;
-      return callback(new Error(&#x27;selector invalid for filter &#x22;&#x27; + filterName + &#x27;&#x22;&#x27;));
+    if (opts.filter &amp;&amp; opts.filter !== '_selector') {
+      var filterName = typeof opts.filter === 'string' ?
+        opts.filter : 'function';
+      return callback(new Error('selector invalid for filter "' + filterName + '"'));
     }
   }
   callback();
@@ -2603,17 +2596,17 @@ if (PouchDB$5._changesFilterPlugin) {
   var api = this;
 
   var host = getHost(opts.name, opts);
-  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+  var dbUrl = genDBUrl(host, '');
 
   opts = clone(opts);
   var ajaxOpts = opts.ajax || {};
 
   if (opts.auth || host.auth) {
     var nAuth = opts.auth || host.auth;
-    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var str = nAuth.username + ':' + nAuth.password;
     var token = thisBtoa(unescape(encodeURIComponent(str)));
     ajaxOpts.headers = ajaxOpts.headers || {};
-    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+    ajaxOpts.headers.Authorization = 'Basic ' + token;
   }
 
   // Not strictly necessary, but we do this because numerous tests
@@ -2627,8 +2620,8 @@ if (PouchDB$5._changesFilterPlugin) {
     reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
       options.headers || {});
 <span class="apidocCodeCommentSpan">    /* istanbul ignore if */
-</span>    if (api.constructor.listeners(&#x27;debug&#x27;).length) {
-      api.constructor.emit(&#x27;debug&#x27;, [&#x27;http&#x27;, reqOpts.method, reqOpts.url]);
+</span>    if (api.constructor.listeners('debug').length) {
+      api.constructor.emit('debug', ['http', reqOpts.method, reqOpts.url]);
     }
     return api._ajax(reqOpts, callback);
   }
@@ -2671,12 +2664,12 @@ if (PouchDB$5._changesFilterPlugin) {
       return setupPromise;
     }
 
-    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    var checkExists = {method: 'GET', url: dbUrl};
     setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 404) {
         // Doesnt exist, create it
-        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
-        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+        res(404, 'PouchDB is just detecting if the remote exists.');
+        return ajaxPromise({}, {method: 'PUT', url: dbUrl});
       } else {
         return PouchPromise$1.reject(err);
       }
@@ -2684,7 +2677,7 @@ if (PouchDB$5._changesFilterPlugin) {
       // If we try to create a database that already exists, skipped in
       // istanbul since its catching a race condition.
       /* istanbul ignore if */
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 412) {
         return true;
       }
       return PouchPromise$1.reject(err);
@@ -2704,33 +2697,33 @@ if (PouchDB$5._changesFilterPlugin) {
   api._remote = true;
   /* istanbul ignore next */
   api.type = function () {
-    return &#x27;http&#x27;;
+    return 'http';
   };
 
-  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
-    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
-      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
-        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+  api.id = adapterFun$$1('id', function (callback) {
+    ajax$$1({}, {method: 'GET', url: genUrl(host, '')}, function (err, result) {
+      var uuid$$1 = (result &amp;&amp; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, '');
       callback(null, uuid$$1);
     });
   });
 
-  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+  api.request = adapterFun$$1('request', function (options, callback) {
     options.url = genDBUrl(host, options.url);
     ajax$$1({}, options, callback);
   });
 
   // Sends a POST request to the host calling the couchdb _compact function
   //    version: The version of CouchDB it is running
-  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
-    if (typeof opts === &#x27;function&#x27;) {
+  api.compact = adapterFun$$1('compact', function (opts, callback) {
+    if (typeof opts === 'function') {
       callback = opts;
       opts = {};
     }
     opts = clone(opts);
     ajax$$1(opts, {
-      url: genDBUrl(host, &#x27;_compact&#x27;),
-      method: &#x27;POST&#x27;
+      url: genDBUrl(host, '_compact'),
+      method: 'POST'
     }, function () {
       function ping() {
         api.info( ...</pre></li>
@@ -2752,17 +2745,17 @@ if (PouchDB$5._changesFilterPlugin) {
   var api = this;
 
   var host = getHost(opts.name, opts);
-  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+  var dbUrl = genDBUrl(host, '');
 
   opts = clone(opts);
   var ajaxOpts = opts.ajax || {};
 
   if (opts.auth || host.auth) {
     var nAuth = opts.auth || host.auth;
-    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var str = nAuth.username + ':' + nAuth.password;
     var token = thisBtoa(unescape(encodeURIComponent(str)));
     ajaxOpts.headers = ajaxOpts.headers || {};
-    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+    ajaxOpts.headers.Authorization = 'Basic ' + token;
   }
 
   // Not strictly necessary, but we do this because numerous tests
@@ -2776,8 +2769,8 @@ if (PouchDB$5._changesFilterPlugin) {
     reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
       options.headers || {});
 <span class="apidocCodeCommentSpan">    /* istanbul ignore if */
-</span>    if (api.constructor.listeners(&#x27;debug&#x27;).length) {
-      api.constructor.emit(&#x27;debug&#x27;, [&#x27;http&#x27;, reqOpts.method, reqOpts.url]);
+</span>    if (api.constructor.listeners('debug').length) {
+      api.constructor.emit('debug', ['http', reqOpts.method, reqOpts.url]);
     }
     return api._ajax(reqOpts, callback);
   }
@@ -2820,12 +2813,12 @@ if (PouchDB$5._changesFilterPlugin) {
       return setupPromise;
     }
 
-    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    var checkExists = {method: 'GET', url: dbUrl};
     setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 404) {
         // Doesnt exist, create it
-        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
-        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+        res(404, 'PouchDB is just detecting if the remote exists.');
+        return ajaxPromise({}, {method: 'PUT', url: dbUrl});
       } else {
         return PouchPromise$1.reject(err);
       }
@@ -2833,7 +2826,7 @@ if (PouchDB$5._changesFilterPlugin) {
       // If we try to create a database that already exists, skipped in
       // istanbul since its catching a race condition.
       /* istanbul ignore if */
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 412) {
         return true;
       }
       return PouchPromise$1.reject(err);
@@ -2853,33 +2846,33 @@ if (PouchDB$5._changesFilterPlugin) {
   api._remote = true;
   /* istanbul ignore next */
   api.type = function () {
-    return &#x27;http&#x27;;
+    return 'http';
   };
 
-  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
-    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
-      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
-        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+  api.id = adapterFun$$1('id', function (callback) {
+    ajax$$1({}, {method: 'GET', url: genUrl(host, '')}, function (err, result) {
+      var uuid$$1 = (result &amp;&amp; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, '');
       callback(null, uuid$$1);
     });
   });
 
-  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+  api.request = adapterFun$$1('request', function (options, callback) {
     options.url = genDBUrl(host, options.url);
     ajax$$1({}, options, callback);
   });
 
   // Sends a POST request to the host calling the couchdb _compact function
   //    version: The version of CouchDB it is running
-  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
-    if (typeof opts === &#x27;function&#x27;) {
+  api.compact = adapterFun$$1('compact', function (opts, callback) {
+    if (typeof opts === 'function') {
       callback = opts;
       opts = {};
     }
     opts = clone(opts);
     ajax$$1(opts, {
-      url: genDBUrl(host, &#x27;_compact&#x27;),
-      method: &#x27;POST&#x27;
+      url: genDBUrl(host, '_compact'),
+      method: 'POST'
     }, function () {
       function ping() {
         api.info( ...</pre></li>
@@ -2941,17 +2934,17 @@ if (PouchDB$5._changesFilterPlugin) {
   var api = this;
 
   var host = getHost(opts.name, opts);
-  var dbUrl = genDBUrl(host, &#x27;&#x27;);
+  var dbUrl = genDBUrl(host, '');
 
   opts = clone(opts);
   var ajaxOpts = opts.ajax || {};
 
   if (opts.auth || host.auth) {
     var nAuth = opts.auth || host.auth;
-    var str = nAuth.username + &#x27;:&#x27; + nAuth.password;
+    var str = nAuth.username + ':' + nAuth.password;
     var token = thisBtoa(unescape(encodeURIComponent(str)));
     ajaxOpts.headers = ajaxOpts.headers || {};
-    ajaxOpts.headers.Authorization = &#x27;Basic &#x27; + token;
+    ajaxOpts.headers.Authorization = 'Basic ' + token;
   }
 
   // Not strictly necessary, but we do this because numerous tests
@@ -2965,8 +2958,8 @@ if (PouchDB$5._changesFilterPlugin) {
     reqOpts.headers = $inject_Object_assign(defaultHeaders, reqAjax.headers,
       options.headers || {});
 <span class="apidocCodeCommentSpan">    /* istanbul ignore if */
-</span>    if (api.constructor.listeners(&#x27;debug&#x27;).length) {
-      api.constructor.emit(&#x27;debug&#x27;, [&#x27;http&#x27;, reqOpts.method, reqOpts.url]);
+</span>    if (api.constructor.listeners('debug').length) {
+      api.constructor.emit('debug', ['http', reqOpts.method, reqOpts.url]);
     }
     return api._ajax(reqOpts, callback);
   }
@@ -3009,12 +3002,12 @@ if (PouchDB$5._changesFilterPlugin) {
       return setupPromise;
     }
 
-    var checkExists = {method: &#x27;GET&#x27;, url: dbUrl};
+    var checkExists = {method: 'GET', url: dbUrl};
     setupPromise = ajaxPromise({}, checkExists).catch(function (err) {
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 404) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 404) {
         // Doesnt exist, create it
-        res(404, &#x27;PouchDB is just detecting if the remote exists.&#x27;);
-        return ajaxPromise({}, {method: &#x27;PUT&#x27;, url: dbUrl});
+        res(404, 'PouchDB is just detecting if the remote exists.');
+        return ajaxPromise({}, {method: 'PUT', url: dbUrl});
       } else {
         return PouchPromise$1.reject(err);
       }
@@ -3022,7 +3015,7 @@ if (PouchDB$5._changesFilterPlugin) {
       // If we try to create a database that already exists, skipped in
       // istanbul since its catching a race condition.
       /* istanbul ignore if */
-      if (err &#x26;&#x26; err.status &#x26;&#x26; err.status === 412) {
+      if (err &amp;&amp; err.status &amp;&amp; err.status === 412) {
         return true;
       }
       return PouchPromise$1.reject(err);
@@ -3042,33 +3035,33 @@ if (PouchDB$5._changesFilterPlugin) {
   api._remote = true;
   /* istanbul ignore next */
   api.type = function () {
-    return &#x27;http&#x27;;
+    return 'http';
   };
 
-  api.id = adapterFun$$1(&#x27;id&#x27;, function (callback) {
-    ajax$$1({}, {method: &#x27;GET&#x27;, url: genUrl(host, &#x27;&#x27;)}, function (err, result) {
-      var uuid$$1 = (result &#x26;&#x26; result.uuid) ?
-        (result.uuid + host.db) : genDBUrl(host, &#x27;&#x27;);
+  api.id = adapterFun$$1('id', function (callback) {
+    ajax$$1({}, {method: 'GET', url: genUrl(host, '')}, function (err, result) {
+      var uuid$$1 = (result &amp;&amp; result.uuid) ?
+        (result.uuid + host.db) : genDBUrl(host, '');
       callback(null, uuid$$1);
     });
   });
 
-  api.request = adapterFun$$1(&#x27;request&#x27;, function (options, callback) {
+  api.request = adapterFun$$1('request', function (options, callback) {
     options.url = genDBUrl(host, options.url);
     ajax$$1({}, options, callback);
   });
 
   // Sends a POST request to the host calling the couchdb _compact function
   //    version: The version of CouchDB it is running
-  api.compact = adapterFun$$1(&#x27;compact&#x27;, function (opts, callback) {
-    if (typeof opts === &#x27;function&#x27;) {
+  api.compact = adapterFun$$1('compact', function (opts, callback) {
+    if (typeof opts === 'function') {
       callback = opts;
       opts = {};
     }
     opts = clone(opts);
     ajax$$1(opts, {
-      url: genDBUrl(host, &#x27;_compact&#x27;),
-      method: &#x27;POST&#x27;
+      url: genDBUrl(host, '_compact'),
+      method: 'POST'
     }, function () {
       function ping() {
         api.info( ...</pre></li>
@@ -3092,11 +3085,11 @@ opts.adapter = opts.adapter || backend.adapter;
 
 self.name = name;
 self._adapter = opts.adapter;
-PouchDB$5.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+PouchDB$5.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
 if (!PouchDB$5.adapters[opts.adapter] ||
     !PouchDB$5.adapters[opts.adapter].<span class="apidocCodeKeywordSpan">valid</span>()) {
-  throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+  throw new Error('Invalid Adapter: ' + opts.adapter);
 }
 
 AbstractPouchDB.call(self);
@@ -3165,11 +3158,11 @@ opts.adapter = opts.adapter || backend.adapter;
 
 self.name = name;
 self._adapter = opts.adapter;
-PouchDB$5.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+PouchDB$5.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
 if (!PouchDB$5.adapters[opts.adapter] ||
     !PouchDB$5.adapters[opts.adapter].<span class="apidocCodeKeywordSpan">valid</span>()) {
-  throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+  throw new Error('Invalid Adapter: ' + opts.adapter);
 }
 
 AbstractPouchDB.call(self);
@@ -3211,29 +3204,29 @@ self.adapter = opts.adapter;
 
     // turn the `arguments` into a proper Array
     var args = new Array(arguments.length);
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       args[i] = arguments[i];
     }
 
     args[0] = exports.coerce(args[0]);
 
-    if (&#x27;string&#x27; !== typeof args[0]) {
-      // anything else let&#x27;s inspect with %O
-      args.unshift(&#x27;%O&#x27;);
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
     }
 
     // apply any `formatters` transformations
     var index = 0;
     args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don&#x27;t increase the array index
-      if (match === &#x27;%%&#x27;) return match;
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
       index++;
       var formatter = exports.formatters[format];
-      if (&#x27;function&#x27; === typeof formatter) {
+      if ('function' === typeof formatter) {
         var val = args[index];
         match = formatter.call(self, val);
 
-        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        // now we need to remove `args[index]` since it's inlined in the `format`
         args.splice(index, 1);
         index--;
       }
@@ -3253,7 +3246,7 @@ self.adapter = opts.adapter;
   debug.color = selectColor(namespace);
 
   // env-specific initialization logic for debug instances
-  if (&#x27;function&#x27; === typeof exports.init) {
+  if ('function' === typeof exports.init) {
     exports.init(debug);
   }
 
@@ -3305,29 +3298,29 @@ self.adapter = opts.adapter;
 
     // turn the `arguments` into a proper Array
     var args = new Array(arguments.length);
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       args[i] = arguments[i];
     }
 
     args[0] = exports.coerce(args[0]);
 
-    if (&#x27;string&#x27; !== typeof args[0]) {
-      // anything else let&#x27;s inspect with %O
-      args.unshift(&#x27;%O&#x27;);
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
     }
 
     // apply any `formatters` transformations
     var index = 0;
     args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don&#x27;t increase the array index
-      if (match === &#x27;%%&#x27;) return match;
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
       index++;
       var formatter = exports.formatters[format];
-      if (&#x27;function&#x27; === typeof formatter) {
+      if ('function' === typeof formatter) {
         var val = args[index];
         match = formatter.call(self, val);
 
-        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        // now we need to remove `args[index]` since it's inlined in the `format`
         args.splice(index, 1);
         index--;
       }
@@ -3347,7 +3340,7 @@ self.adapter = opts.adapter;
   debug.color = selectColor(namespace);
 
   // env-specific initialization logic for debug instances
-  if (&#x27;function&#x27; === typeof exports.init) {
+  if ('function' === typeof exports.init) {
     exports.init(debug);
   }
 
@@ -3366,7 +3359,7 @@ self.adapter = opts.adapter;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function disable() {
-  exports.enable(&#x27;&#x27;);
+  exports.enable('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3386,16 +3379,16 @@ self.adapter = opts.adapter;
   exports.names = [];
   exports.skips = [];
 
-  var split = (namespaces || &#x27;&#x27;).split(/[\s,]+/);
+  var split = (namespaces || '').split(/[\s,]+/);
   var len = split.length;
 
-  for (var i = 0; i &#x3c; len; i++) {
+  for (var i = 0; i &lt; len; i++) {
     if (!split[i]) continue; // ignore empty strings
-    namespaces = split[i].replace(/\*/g, &#x27;.*?&#x27;);
-    if (namespaces[0] === &#x27;-&#x27;) {
-      exports.skips.push(new RegExp(&#x27;^&#x27; + namespaces.substr(1) + &#x27;$&#x27;));
+    namespaces = split[i].replace(/\*/g, '.*?');
+    if (namespaces[0] === '-') {
+      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
     } else {
-      exports.names.push(new RegExp(&#x27;^&#x27; + namespaces + &#x27;$&#x27;));
+      exports.names.push(new RegExp('^' + namespaces + '$'));
     }
   }
 }</pre></li>
@@ -3413,12 +3406,12 @@ self.adapter = opts.adapter;
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function enabled(name) {
   var i, len;
-  for (i = 0, len = exports.skips.length; i &#x3c; len; i++) {
+  for (i = 0, len = exports.skips.length; i &lt; len; i++) {
     if (exports.skips[i].test(name)) {
       return false;
     }
   }
-  for (i = 0, len = exports.names.length; i &#x3c; len; i++) {
+  for (i = 0, len = exports.names.length; i &lt; len; i++) {
     if (exports.names[i].test(name)) {
       return true;
     }
@@ -3443,13 +3436,13 @@ self.adapter = opts.adapter;
 
   if (useColors) {
     var c = this.color;
-    var prefix = &#x27;  \u001b[3&#x27; + c + &#x27;;1m&#x27; + name + &#x27; &#x27; + &#x27;\u001b[0m&#x27;;
+    var prefix = '  \u001b[3' + c + ';1m' + name + ' ' + '\u001b[0m';
 
-    args[0] = prefix + args[0].split(&#x27;\n&#x27;).join(&#x27;\n&#x27; + prefix);
-    args.push(&#x27;\u001b[3&#x27; + c + &#x27;m+&#x27; + exports.humanize(this.diff) + &#x27;\u001b[0m&#x27;);
+    args[0] = prefix + args[0].split('\n').join('\n' + prefix);
+    args.push('\u001b[3' + c + 'm+' + exports.humanize(this.diff) + '\u001b[0m');
   } else {
     args[0] = new Date().toUTCString()
-      + &#x27; &#x27; + name + &#x27; &#x27; + args[0];
+      + ' ' + name + ' ' + args[0];
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -3467,14 +3460,14 @@ self.adapter = opts.adapter;
     <li>description and source-code<pre class="apidocCodePre">humanize = function (val, options) {
   options = options || {}
   var type = typeof val
-  if (type === &#x27;string&#x27; &#x26;&#x26; val.length &#x3e; 0) {
+  if (type === 'string' &amp;&amp; val.length &gt; 0) {
     return parse(val)
-  } else if (type === &#x27;number&#x27; &#x26;&#x26; isNaN(val) === false) {
+  } else if (type === 'number' &amp;&amp; isNaN(val) === false) {
     return options.long ?
 			fmtLong(val) :
 			fmtShort(val)
   }
-  throw new Error(&#x27;val is not a non-empty string or a valid number. val=&#x27; + JSON.stringify(val))
+  throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val))
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3519,7 +3512,7 @@ self.adapter = opts.adapter;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function log() {
-  return stream.write(util.format.apply(util, arguments) + &#x27;\n&#x27;);
+  return stream.write(util.format.apply(util, arguments) + '\n');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3536,7 +3529,7 @@ self.adapter = opts.adapter;
     <li>description and source-code<pre class="apidocCodePre">function save(namespaces) {
   if (null == namespaces) {
     // If you set a process.env field to null or undefined, it gets cast to the
-    // string &#x27;null&#x27; or &#x27;undefined&#x27;. Just delete instead.
+    // string 'null' or 'undefined'. Just delete instead.
     delete process.env.DEBUG;
   } else {
     process.env.DEBUG = namespaces;
@@ -3555,7 +3548,7 @@ self.adapter = opts.adapter;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function useColors() {
-  return &#x27;colors&#x27; in exports.inspectOpts
+  return 'colors' in exports.inspectOpts
     ? Boolean(exports.inspectOpts.colors)
     : tty.isatty(fd);
 }</pre></li>
@@ -3605,7 +3598,7 @@ self.adapter = opts.adapter;
     <li>description and source-code<pre class="apidocCodePre">o = function (v) {
   this.inspectOpts.colors = this.useColors;
   return util.inspect(v, this.inspectOpts)
-    .replace(/\s*\n\s*/g, &#x27; &#x27;);
+    .replace(/\s*\n\s*/g, ' ');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3634,7 +3627,7 @@ self.adapter = opts.adapter;
   var self = this;
   opts = opts || {};
 
-  if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+  if (name &amp;&amp; typeof name === 'object') {
     opts = name;
     name = opts.name;
     delete opts.name;
@@ -3645,11 +3638,11 @@ self.adapter = opts.adapter;
   self.auto_compaction = opts.auto_compaction;
   self.prefix = PouchDB$5.prefix;
 
-  if (typeof name !== &#x27;string&#x27;) {
-    throw new Error(&#x27;Missing/invalid DB name&#x27;);
+  if (typeof name !== 'string') {
+    throw new Error('Missing/invalid DB name');
   }
 
-  var prefixedName = (opts.prefix || &#x27;&#x27;) + name;
+  var prefixedName = (opts.prefix || '') + name;
   var backend = parseAdapter(prefixedName, opts);
 
   opts.name = backend.name;
@@ -3657,11 +3650,11 @@ self.adapter = opts.adapter;
 
   self.name = name;
   self._adapter = opts.adapter;
-  PouchDB$5.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+  PouchDB$5.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
   if (!PouchDB$5.adapters[opts.adapter] ||
       !PouchDB$5.adapters[opts.adapter].valid()) {
-    throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+    throw new Error('Invalid Adapter: ' + opts.adapter);
   }
 
   AbstractPouchDB.call(self);
@@ -3675,8 +3668,8 @@ self.adapter = opts.adapter;
     }
     prepareForDestruction(self);
 
-    self.emit(&#x27;created&#x27;, self);
-    PouchDB$5.emit(&#x27;created&#x27;, self.name);
+    self.emit('created', self);
+    PouchDB$5.emit('created', self.name);
     self.taskqueue.ready(self);
   });
 
@@ -3710,7 +3703,7 @@ self.adapter = opts.adapter;
 }
 
 var IDBPouch = function (PouchDB) {
-  PouchDB.<span class="apidocCodeKeywordSpan">adapter</span>(&#x27;idb&#x27;, IdbPouch, true);
+  PouchDB.<span class="apidocCodeKeywordSpan">adapter</span>('idb', IdbPouch, true);
 };
 
 //
@@ -3740,7 +3733,7 @@ inherits(Changes, events.EventEmitter);
 function attachBrowserEvents(self) {
 if (isChromeApp()) {
   chrome.storage.onChanged.<span class="apidocCodeKeywordSpan">addListener</span>(function (e) {
-    // make sure it&#x27;s event addressed to us
+    // make sure it's event addressed to us
     if (e.db_name != null) {
       //object only has oldValue, newValue members
       self.emit(e.dbName.newValue);
@@ -3777,29 +3770,29 @@ if (isChromeApp()) {
 
     // turn the `arguments` into a proper Array
     var args = new Array(arguments.length);
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       args[i] = arguments[i];
     }
 
     args[0] = exports.coerce(args[0]);
 
-    if (&#x27;string&#x27; !== typeof args[0]) {
-      // anything else let&#x27;s inspect with %O
-      args.unshift(&#x27;%O&#x27;);
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
     }
 
     // apply any `formatters` transformations
     var index = 0;
     args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don&#x27;t increase the array index
-      if (match === &#x27;%%&#x27;) return match;
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
       index++;
       var formatter = exports.formatters[format];
-      if (&#x27;function&#x27; === typeof formatter) {
+      if ('function' === typeof formatter) {
         var val = args[index];
         match = formatter.call(self, val);
 
-        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        // now we need to remove `args[index]` since it's inlined in the `format`
         args.splice(index, 1);
         index--;
       }
@@ -3819,7 +3812,7 @@ if (isChromeApp()) {
   debug.color = selectColor(namespace);
 
   // env-specific initialization logic for debug instances
-  if (&#x27;function&#x27; === typeof exports.init) {
+  if ('function' === typeof exports.init) {
     exports.init(debug);
   }
 
@@ -3845,7 +3838,7 @@ if (isChromeApp()) {
 
     opts = opts || {};
 
-    if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+    if (name &amp;&amp; typeof name === 'object') {
       opts = name;
       name = opts.name;
       delete opts.name;
@@ -3886,19 +3879,19 @@ if (isChromeApp()) {
     <li>example usage<pre class="apidocCodePre">...
 function logApiCall(self, name, args) {
   /* istanbul ignore if */
-  if (self.constructor.listeners(&#x27;debug&#x27;).length) {
-var logArgs = [&#x27;api&#x27;, self.name, name];
-for (var i = 0; i &#x3c; args.length - 1; i++) {
+  if (self.constructor.listeners('debug').length) {
+var logArgs = ['api', self.name, name];
+for (var i = 0; i &lt; args.length - 1; i++) {
   logArgs.push(args[i]);
 }
-self.constructor.<span class="apidocCodeKeywordSpan">emit</span>(&#x27;debug&#x27;, logArgs);
+self.constructor.<span class="apidocCodeKeywordSpan">emit</span>('debug', logArgs);
 
 // override the callback itself to log the response
 var origCallback = args[args.length - 1];
 args[args.length - 1] = function (err, res) {
-  var responseArgs = [&#x27;api&#x27;, self.name, name];
+  var responseArgs = ['api', self.name, name];
   responseArgs = responseArgs.concat(
-    err ? [&#x27;error&#x27;, err] : [&#x27;success&#x27;, res]
+    err ? ['error', err] : ['success', res]
 ...</pre></li>
     </ul>
 
@@ -3939,14 +3932,14 @@ args[args.length - 1] = function (err, res) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  return db.type() === &#x27;http&#x27;;
+  return db.type() === 'http';
 }
 /* istanbul ignore next */
 return false;
 }
 
 function listenerCount(ee, type) {
-return &#x27;listenerCount&#x27; in ee ? ee.<span class="apidocCodeKeywordSpan">listenerCount</span>(type) :
+return 'listenerCount' in ee ? ee.<span class="apidocCodeKeywordSpan">listenerCount</span>(type) :
                                events.EventEmitter.listenerCount(ee, type);
 }
 
@@ -3975,12 +3968,12 @@ return promise;
 
 function logApiCall(self, name, args) {
   /* istanbul ignore if */
-  if (self.constructor.<span class="apidocCodeKeywordSpan">listeners</span>(&#x27;debug&#x27;).length) {
-var logArgs = [&#x27;api&#x27;, self.name, name];
-for (var i = 0; i &#x3c; args.length - 1; i++) {
+  if (self.constructor.<span class="apidocCodeKeywordSpan">listeners</span>('debug').length) {
+var logArgs = ['api', self.name, name];
+for (var i = 0; i &lt; args.length - 1; i++) {
   logArgs.push(args[i]);
 }
-self.constructor.emit(&#x27;debug&#x27;, logArgs);
+self.constructor.emit('debug', logArgs);
 
 // override the callback itself to log the response
 ...</pre></li>
@@ -4004,13 +3997,13 @@ function onError() {
   inprogress = false;
 }
 
-db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>(&#x27;change&#x27;, function (c) {
-  if (c.seq &#x3e; opts.since &#x26;&#x26; !opts.cancelled) {
+db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>('change', function (c) {
+  if (c.seq &gt; opts.since &amp;&amp; !opts.cancelled) {
     opts.since = c.seq;
     opts.onChange(c);
   }
-}).on(&#x27;complete&#x27;, function () {
-  if (inprogress === &#x27;waiting&#x27;) {
+}).on('complete', function () {
+  if (inprogress === 'waiting') {
     nextTick(eventFunction);
 ...</pre></li>
     </ul>
@@ -4028,12 +4021,12 @@ db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>(&#x27;chan
     <li>example usage<pre class="apidocCodePre">...
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 }
 function onDestroy() {
   self.cancel();
 }
-db.<span class="apidocCodeKeywordSpan">once</span>(&#x27;destroyed&#x27;, onDestroy);
+db.<span class="apidocCodeKeywordSpan">once</span>('destroyed', onDestroy);
 
 opts.onChange = function (change) {
   /* istanbul ignore if */
@@ -4054,10 +4047,10 @@ opts.onChange = function (change) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">plugin = function (obj) {
-  if (typeof obj === &#x27;function&#x27;) { // function style for plugins
+  if (typeof obj === 'function') { // function style for plugins
     obj(PouchDB$5);
-  } else if (typeof obj !== &#x27;object&#x27; || Object.keys(obj).length === 0) {
-    throw new Error(&#x27;Invalid plugin: got \&#x22;&#x27; + obj + &#x27;\&#x22;, expected an object or a function&#x27;);
+  } else if (typeof obj !== 'object' || Object.keys(obj).length === 0) {
+    throw new Error('Invalid plugin: got \"' + obj + '\", expected an object or a function');
   } else {
     Object.keys(obj).forEach(function (id) { // object style for plugins
       PouchDB$5.prototype[id] = obj[id];
@@ -4125,20 +4118,20 @@ function toObject(array) {
     <li>description and source-code<pre class="apidocCodePre">removeAllListeners = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   if (err) {
-    if (listenerCount(self, &#x27;error&#x27;) &#x3e; 0) {
-      self.emit(&#x27;error&#x27;, err);
+    if (listenerCount(self, 'error') &gt; 0) {
+      self.emit('error', err);
     }
   } else {
-    self.emit(&#x27;complete&#x27;, resp);
+    self.emit('complete', resp);
   }
   self.<span class="apidocCodeKeywordSpan">removeAllListeners</span>();
-  db.removeListener(&#x27;destroyed&#x27;, onDestroy);
+  db.removeListener('destroyed', onDestroy);
 });
 if (callback) {
-  self.on(&#x27;complete&#x27;, function (resp) {
+  self.on('complete', function (resp) {
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 ...</pre></li>
     </ul>
 
@@ -4153,20 +4146,20 @@ if (callback) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeListener = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    if (listenerCount(self, &#x27;error&#x27;) &#x3e; 0) {
-      self.emit(&#x27;error&#x27;, err);
+    if (listenerCount(self, 'error') &gt; 0) {
+      self.emit('error', err);
     }
   } else {
-    self.emit(&#x27;complete&#x27;, resp);
+    self.emit('complete', resp);
   }
   self.removeAllListeners();
-  db.<span class="apidocCodeKeywordSpan">removeListener</span>(&#x27;destroyed&#x27;, onDestroy);
+  db.<span class="apidocCodeKeywordSpan">removeListener</span>('destroyed', onDestroy);
 });
 if (callback) {
-  self.on(&#x27;complete&#x27;, function (resp) {
+  self.on('complete', function (resp) {
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 }
 ...</pre></li>
     </ul>
@@ -4182,23 +4175,23 @@ if (callback) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function replicateWrapper(src, target, opts, callback) {
 
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (typeof opts === &#x27;undefined&#x27;) {
+  if (typeof opts === 'undefined') {
     opts = {};
   }
 
-  if (opts.doc_ids &#x26;&#x26; !Array.isArray(opts.doc_ids)) {
+  if (opts.doc_ids &amp;&amp; !Array.isArray(opts.doc_ids)) {
     throw createError(BAD_REQUEST,
-                       &#x22;`doc_ids` filter parameter is not a list.&#x22;);
+                       "`doc_ids` filter parameter is not a list.");
   }
 
   opts.complete = callback;
   opts = clone(opts);
   opts.continuous = opts.continuous || opts.live;
-  opts.retry = (&#x27;retry&#x27; in opts) ? opts.retry : false;
+  opts.retry = ('retry' in opts) ? opts.retry : false;
 <span class="apidocCodeCommentSpan">  /*jshint validthis:true */
 </span>  opts.PouchConstructor = opts.PouchConstructor || this;
   var replicateRet = new Replication(opts);
@@ -4210,7 +4203,7 @@ if (callback) {
     <li>example usage<pre class="apidocCodePre">...
 PouchDB.sync = sync$1;
 
-Object.defineProperty(PouchDB.prototype, &#x27;replicate&#x27;, {
+Object.defineProperty(PouchDB.prototype, 'replicate', {
   get: function () {
     var self = this;
     return {
@@ -4264,11 +4257,11 @@ Object.defineProperty(PouchDB.prototype, &#x27;replicate&#x27;, {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function sync$1(src, target, opts, callback) {
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (typeof opts === &#x27;undefined&#x27;) {
+  if (typeof opts === 'undefined') {
     opts = {};
   }
   opts = clone(opts);
@@ -4399,7 +4392,7 @@ PouchDB$5.plugin(IDBPouch)
   var self = this;
   opts = opts || {};
 
-  if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+  if (name &amp;&amp; typeof name === 'object') {
     opts = name;
     name = opts.name;
     delete opts.name;
@@ -4410,11 +4403,11 @@ PouchDB$5.plugin(IDBPouch)
   self.auto_compaction = opts.auto_compaction;
   self.prefix = PouchDB$2.prefix;
 
-  if (typeof name !== &#x27;string&#x27;) {
-    throw new Error(&#x27;Missing/invalid DB name&#x27;);
+  if (typeof name !== 'string') {
+    throw new Error('Missing/invalid DB name');
   }
 
-  var prefixedName = (opts.prefix || &#x27;&#x27;) + name;
+  var prefixedName = (opts.prefix || '') + name;
   var backend = parseAdapter(prefixedName, opts);
 
   opts.name = backend.name;
@@ -4422,11 +4415,11 @@ PouchDB$5.plugin(IDBPouch)
 
   self.name = name;
   self._adapter = opts.adapter;
-  PouchDB$2.emit(&#x27;debug&#x27;, [&#x27;adapter&#x27;, &#x27;Picked adapter: &#x27;, opts.adapter]);
+  PouchDB$2.emit('debug', ['adapter', 'Picked adapter: ', opts.adapter]);
 
   if (!PouchDB$2.adapters[opts.adapter] ||
       !PouchDB$2.adapters[opts.adapter].valid()) {
-    throw new Error(&#x27;Invalid Adapter: &#x27; + opts.adapter);
+    throw new Error('Invalid Adapter: ' + opts.adapter);
   }
 
   AbstractPouchDB.call(self);
@@ -4440,8 +4433,8 @@ PouchDB$5.plugin(IDBPouch)
     }
     prepareForDestruction(self);
 
-    self.emit(&#x27;created&#x27;, self);
-    PouchDB$2.emit(&#x27;created&#x27;, self.name);
+    self.emit('created', self);
+    PouchDB$2.emit('created', self.name);
     self.taskqueue.ready(self);
   });
 
@@ -4475,7 +4468,7 @@ PouchDB$5.plugin(IDBPouch)
 }
 
 var IDBPouch = function (PouchDB) {
-  PouchDB.<span class="apidocCodeKeywordSpan">adapter</span>(&#x27;idb&#x27;, IdbPouch, true);
+  PouchDB.<span class="apidocCodeKeywordSpan">adapter</span>('idb', IdbPouch, true);
 };
 
 //
@@ -4505,7 +4498,7 @@ inherits(Changes, events.EventEmitter);
 function attachBrowserEvents(self) {
 if (isChromeApp()) {
   chrome.storage.onChanged.<span class="apidocCodeKeywordSpan">addListener</span>(function (e) {
-    // make sure it&#x27;s event addressed to us
+    // make sure it's event addressed to us
     if (e.db_name != null) {
       //object only has oldValue, newValue members
       self.emit(e.dbName.newValue);
@@ -4542,29 +4535,29 @@ if (isChromeApp()) {
 
     // turn the `arguments` into a proper Array
     var args = new Array(arguments.length);
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       args[i] = arguments[i];
     }
 
     args[0] = exports.coerce(args[0]);
 
-    if (&#x27;string&#x27; !== typeof args[0]) {
-      // anything else let&#x27;s inspect with %O
-      args.unshift(&#x27;%O&#x27;);
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
     }
 
     // apply any `formatters` transformations
     var index = 0;
     args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don&#x27;t increase the array index
-      if (match === &#x27;%%&#x27;) return match;
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
       index++;
       var formatter = exports.formatters[format];
-      if (&#x27;function&#x27; === typeof formatter) {
+      if ('function' === typeof formatter) {
         var val = args[index];
         match = formatter.call(self, val);
 
-        // now we need to remove `args[index]` since it&#x27;s inlined in the `format`
+        // now we need to remove `args[index]` since it's inlined in the `format`
         args.splice(index, 1);
         index--;
       }
@@ -4584,7 +4577,7 @@ if (isChromeApp()) {
   debug.color = selectColor(namespace);
 
   // env-specific initialization logic for debug instances
-  if (&#x27;function&#x27; === typeof exports.init) {
+  if ('function' === typeof exports.init) {
     exports.init(debug);
   }
 
@@ -4610,7 +4603,7 @@ if (isChromeApp()) {
 
     opts = opts || {};
 
-    if (name &#x26;&#x26; typeof name === &#x27;object&#x27;) {
+    if (name &amp;&amp; typeof name === 'object') {
       opts = name;
       name = opts.name;
       delete opts.name;
@@ -4651,19 +4644,19 @@ if (isChromeApp()) {
     <li>example usage<pre class="apidocCodePre">...
 function logApiCall(self, name, args) {
   /* istanbul ignore if */
-  if (self.constructor.listeners(&#x27;debug&#x27;).length) {
-var logArgs = [&#x27;api&#x27;, self.name, name];
-for (var i = 0; i &#x3c; args.length - 1; i++) {
+  if (self.constructor.listeners('debug').length) {
+var logArgs = ['api', self.name, name];
+for (var i = 0; i &lt; args.length - 1; i++) {
   logArgs.push(args[i]);
 }
-self.constructor.<span class="apidocCodeKeywordSpan">emit</span>(&#x27;debug&#x27;, logArgs);
+self.constructor.<span class="apidocCodeKeywordSpan">emit</span>('debug', logArgs);
 
 // override the callback itself to log the response
 var origCallback = args[args.length - 1];
 args[args.length - 1] = function (err, res) {
-  var responseArgs = [&#x27;api&#x27;, self.name, name];
+  var responseArgs = ['api', self.name, name];
   responseArgs = responseArgs.concat(
-    err ? [&#x27;error&#x27;, err] : [&#x27;success&#x27;, res]
+    err ? ['error', err] : ['success', res]
 ...</pre></li>
     </ul>
 
@@ -4704,14 +4697,14 @@ args[args.length - 1] = function (err, res) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  return db.type() === &#x27;http&#x27;;
+  return db.type() === 'http';
 }
 /* istanbul ignore next */
 return false;
 }
 
 function listenerCount(ee, type) {
-return &#x27;listenerCount&#x27; in ee ? ee.<span class="apidocCodeKeywordSpan">listenerCount</span>(type) :
+return 'listenerCount' in ee ? ee.<span class="apidocCodeKeywordSpan">listenerCount</span>(type) :
                                events.EventEmitter.listenerCount(ee, type);
 }
 
@@ -4740,12 +4733,12 @@ return promise;
 
 function logApiCall(self, name, args) {
   /* istanbul ignore if */
-  if (self.constructor.<span class="apidocCodeKeywordSpan">listeners</span>(&#x27;debug&#x27;).length) {
-var logArgs = [&#x27;api&#x27;, self.name, name];
-for (var i = 0; i &#x3c; args.length - 1; i++) {
+  if (self.constructor.<span class="apidocCodeKeywordSpan">listeners</span>('debug').length) {
+var logArgs = ['api', self.name, name];
+for (var i = 0; i &lt; args.length - 1; i++) {
   logArgs.push(args[i]);
 }
-self.constructor.emit(&#x27;debug&#x27;, logArgs);
+self.constructor.emit('debug', logArgs);
 
 // override the callback itself to log the response
 ...</pre></li>
@@ -4769,13 +4762,13 @@ function onError() {
   inprogress = false;
 }
 
-db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>(&#x27;change&#x27;, function (c) {
-  if (c.seq &#x3e; opts.since &#x26;&#x26; !opts.cancelled) {
+db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>('change', function (c) {
+  if (c.seq &gt; opts.since &amp;&amp; !opts.cancelled) {
     opts.since = c.seq;
     opts.onChange(c);
   }
-}).on(&#x27;complete&#x27;, function () {
-  if (inprogress === &#x27;waiting&#x27;) {
+}).on('complete', function () {
+  if (inprogress === 'waiting') {
     nextTick(eventFunction);
 ...</pre></li>
     </ul>
@@ -4793,12 +4786,12 @@ db.changes(changesOpts).<span class="apidocCodeKeywordSpan">on</span>(&#x27;chan
     <li>example usage<pre class="apidocCodePre">...
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 }
 function onDestroy() {
   self.cancel();
 }
-db.<span class="apidocCodeKeywordSpan">once</span>(&#x27;destroyed&#x27;, onDestroy);
+db.<span class="apidocCodeKeywordSpan">once</span>('destroyed', onDestroy);
 
 opts.onChange = function (change) {
   /* istanbul ignore if */
@@ -4819,10 +4812,10 @@ opts.onChange = function (change) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">plugin = function (obj) {
-  if (typeof obj === &#x27;function&#x27;) { // function style for plugins
+  if (typeof obj === 'function') { // function style for plugins
     obj(PouchDB$2);
-  } else if (typeof obj !== &#x27;object&#x27; || Object.keys(obj).length === 0) {
-    throw new Error(&#x27;Invalid plugin: got \&#x22;&#x27; + obj + &#x27;\&#x22;, expected an object or a function&#x27;);
+  } else if (typeof obj !== 'object' || Object.keys(obj).length === 0) {
+    throw new Error('Invalid plugin: got \"' + obj + '\", expected an object or a function');
   } else {
     Object.keys(obj).forEach(function (id) { // object style for plugins
       PouchDB$2.prototype[id] = obj[id];
@@ -4890,20 +4883,20 @@ function toObject(array) {
     <li>description and source-code<pre class="apidocCodePre">removeAllListeners = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   if (err) {
-    if (listenerCount(self, &#x27;error&#x27;) &#x3e; 0) {
-      self.emit(&#x27;error&#x27;, err);
+    if (listenerCount(self, 'error') &gt; 0) {
+      self.emit('error', err);
     }
   } else {
-    self.emit(&#x27;complete&#x27;, resp);
+    self.emit('complete', resp);
   }
   self.<span class="apidocCodeKeywordSpan">removeAllListeners</span>();
-  db.removeListener(&#x27;destroyed&#x27;, onDestroy);
+  db.removeListener('destroyed', onDestroy);
 });
 if (callback) {
-  self.on(&#x27;complete&#x27;, function (resp) {
+  self.on('complete', function (resp) {
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 ...</pre></li>
     </ul>
 
@@ -4918,20 +4911,20 @@ if (callback) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeListener = function () { [native code] }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    if (listenerCount(self, &#x27;error&#x27;) &#x3e; 0) {
-      self.emit(&#x27;error&#x27;, err);
+    if (listenerCount(self, 'error') &gt; 0) {
+      self.emit('error', err);
     }
   } else {
-    self.emit(&#x27;complete&#x27;, resp);
+    self.emit('complete', resp);
   }
   self.removeAllListeners();
-  db.<span class="apidocCodeKeywordSpan">removeListener</span>(&#x27;destroyed&#x27;, onDestroy);
+  db.<span class="apidocCodeKeywordSpan">removeListener</span>('destroyed', onDestroy);
 });
 if (callback) {
-  self.on(&#x27;complete&#x27;, function (resp) {
+  self.on('complete', function (resp) {
     callback(null, resp);
   });
-  self.on(&#x27;error&#x27;, callback);
+  self.on('error', callback);
 }
 ...</pre></li>
     </ul>
@@ -4947,23 +4940,23 @@ if (callback) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function replicateWrapper(src, target, opts, callback) {
 
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (typeof opts === &#x27;undefined&#x27;) {
+  if (typeof opts === 'undefined') {
     opts = {};
   }
 
-  if (opts.doc_ids &#x26;&#x26; !Array.isArray(opts.doc_ids)) {
+  if (opts.doc_ids &amp;&amp; !Array.isArray(opts.doc_ids)) {
     throw createError(BAD_REQUEST,
-                       &#x22;`doc_ids` filter parameter is not a list.&#x22;);
+                       "`doc_ids` filter parameter is not a list.");
   }
 
   opts.complete = callback;
   opts = clone(opts);
   opts.continuous = opts.continuous || opts.live;
-  opts.retry = (&#x27;retry&#x27; in opts) ? opts.retry : false;
+  opts.retry = ('retry' in opts) ? opts.retry : false;
 <span class="apidocCodeCommentSpan">  /*jshint validthis:true */
 </span>  opts.PouchConstructor = opts.PouchConstructor || this;
   var replicateRet = new Replication(opts);
@@ -4975,7 +4968,7 @@ if (callback) {
     <li>example usage<pre class="apidocCodePre">...
 PouchDB.sync = sync$1;
 
-Object.defineProperty(PouchDB.prototype, &#x27;replicate&#x27;, {
+Object.defineProperty(PouchDB.prototype, 'replicate', {
   get: function () {
     var self = this;
     return {
@@ -5029,11 +5022,11 @@ Object.defineProperty(PouchDB.prototype, &#x27;replicate&#x27;, {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function sync$1(src, target, opts, callback) {
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (typeof opts === &#x27;undefined&#x27;) {
+  if (typeof opts === 'undefined') {
     opts = {};
   }
   opts = clone(opts);
@@ -5158,28 +5151,28 @@ PouchDB$5.plugin(IDBPouch)
   function onComplete(resp) {
     var lastSeq = resp.last_seq;
     PouchPromise$1.all(promises).then(function () {
-      return upsert(self, &#x27;_local/compaction&#x27;, function deltaFunc(doc) {
-        if (!doc.last_seq || doc.last_seq &#x3c; lastSeq) {
+      return upsert(self, '_local/compaction', function deltaFunc(doc) {
+        if (!doc.last_seq || doc.last_seq &lt; lastSeq) {
           doc.last_seq = lastSeq;
           return doc;
         }
-        return false; // somebody else got here first, don&#x27;t update
+        return false; // somebody else got here first, don't update
       });
     }).then(function () {
       callback(null, {ok: true});
     }).catch(callback);
   }
   self.changes(changesOpts)
-    .on(&#x27;change&#x27;, onChange)
-    .on(&#x27;complete&#x27;, onComplete)
-    .on(&#x27;error&#x27;, callback);
+    .on('change', onChange)
+    .on('complete', onComplete)
+    .on('error', callback);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var callback = task.callback;
-self.get(&#x27;_local/compaction&#x27;).catch(function () {
+self.get('_local/compaction').catch(function () {
   return false;
 }).then(function (doc) {
-  if (doc &#x26;&#x26; doc.last_seq) {
+  if (doc &amp;&amp; doc.last_seq) {
     opts.last_seq = doc.last_seq;
   }
   self.<span class="apidocCodeKeywordSpan">_compact</span>(opts, function (err, res) {
@@ -5207,7 +5200,7 @@ self.get(&#x27;_local/compaction&#x27;).catch(function () {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5248,7 +5241,7 @@ function processKeyValueDocs(metaDoc, kvDocsRes) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5257,18 +5250,18 @@ function processKeyValueDocs(metaDoc, kvDocsRes) {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-if (typeof opts === &#x27;function&#x27;) {
+if (typeof opts === 'function') {
   callback = opts;
   opts = {};
 }
-if (typeof doc !== &#x27;object&#x27; || Array.isArray(doc)) {
+if (typeof doc !== 'object' || Array.isArray(doc)) {
   return callback(createError(NOT_AN_OBJECT));
 }
 this.<span class="apidocCodeKeywordSpan">bulkDocs</span>({docs: [doc]}, opts, yankError(callback));
 });
 
-AbstractPouchDB.prototype.put = adapterFun(&#x27;put&#x27;, function (doc, opts, cb) {
-if (typeof opts === &#x27;function&#x27;) {
+AbstractPouchDB.prototype.put = adapterFun('put', function (doc, opts, cb) {
+if (typeof opts === 'function') {
   cb = opts;
   opts = {};
 }
@@ -5289,7 +5282,7 @@ if (typeof opts === &#x27;function&#x27;) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5308,7 +5301,7 @@ if (!bulkGetOpts.docs.length) { // optimization: skip empty requests
 return src.<span class="apidocCodeKeywordSpan">bulkGet</span>(bulkGetOpts).then(function (bulkGetResponse) {
   /* istanbul ignore if */
   if (state.cancelled) {
-    throw new Error(&#x27;cancelled&#x27;);
+    throw new Error('cancelled');
   }
   return PouchPromise$1.all(bulkGetResponse.results.map(function (bulkGetInfo) {
     return PouchPromise$1.all(bulkGetInfo.docs.map(function (doc) {
@@ -5326,7 +5319,7 @@ return src.<span class="apidocCodeKeywordSpan">bulkGet</span>(bulkGetOpts).then(
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">changes = function (opts, callback) {
-  if (typeof opts === &#x27;function&#x27;) {
+  if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
@@ -5340,13 +5333,13 @@ function onError() {
   inprogress = false;
 }
 
-db.<span class="apidocCodeKeywordSpan">changes</span>(changesOpts).on(&#x27;change&#x27;, function (c) {
-  if (c.seq &#x3e; opts.since &#x26;&#x26; !opts.cancelled) {
+db.<span class="apidocCodeKeywordSpan">changes</span>(changesOpts).on('change', function (c) {
+  if (c.seq &gt; opts.since &amp;&amp; !opts.cancelled) {
     opts.since = c.seq;
     opts.onChange(c);
   }
-}).on(&#x27;complete&#x27;, function () {
-  if (inprogress === &#x27;waiting&#x27;) {
+}).on('complete', function () {
+  if (inprogress === 'waiting') {
     nextTick(eventFunction);
 ...</pre></li>
     </ul>
@@ -5365,7 +5358,7 @@ db.<span class="apidocCodeKeywordSpan">changes</span>(changesOpts).on(&#x27;chan
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5380,14 +5373,14 @@ api._changes = function idbChanges(opts) {
 
 api._close = function (callback) {
   // https://developer.mozilla.org/en-US/docs/IndexedDB/IDBDatabase#close
-  // &#x22;Returns immediately and closes the connection in a separate thread...&#x22;
+  // "Returns immediately and closes the connection in a separate thread..."
   idb.<span class="apidocCodeKeywordSpan">close</span>();
   cachedDBs.delete(dbName);
   callback();
 };
 
 api._getRevisionTree = function (docId, callback) {
-  var txnResult = openTransactionSafely(idb, [DOC_STORE], &#x27;readonly&#x27;);
+  var txnResult = openTransactionSafely(idb, [DOC_STORE], 'readonly');
   if (txnResult.error) {
 ...</pre></li>
     </ul>
@@ -5406,7 +5399,7 @@ api._getRevisionTree = function (docId, callback) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5431,7 +5424,7 @@ api._getRevisionTree = function (docId, callback) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5452,8 +5445,8 @@ function onChange(row) {
 function onComplete(resp) {
   var lastSeq = resp.last_seq;
   PouchPromise$1.all(promises).then(function () {
-    return upsert(self, &#x27;_local/compaction&#x27;, function deltaFunc(doc) {
-      if (!doc.last_seq || doc.last_seq &#x3c; lastSeq) {
+    return upsert(self, '_local/compaction', function deltaFunc(doc) {
+      if (!doc.last_seq || doc.last_seq &lt; lastSeq) {
         doc.last_seq = lastSeq;
 ...</pre></li>
     </ul>
@@ -5472,7 +5465,7 @@ function onComplete(resp) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5487,7 +5480,7 @@ function onComplete(resp) {
     // use_prefix is only false in the browser
     /* istanbul ignore next */
     var trueName = usePrefix ?
-      name.replace(new RegExp(&#x27;^&#x27; + PouchDB.prefix), &#x27;&#x27;) : name;
+      name.replace(new RegExp('^' + PouchDB.prefix), '') : name;
     return new PouchDB(trueName, self.__opts).<span class="apidocCodeKeywordSpan">destroy</span>();
   });
   PouchPromise$1.all(deletedMap).then(destroyDb, callback);
@@ -5513,7 +5506,7 @@ this.isReady = false;
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5554,7 +5547,7 @@ var numDone = 0;
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5575,7 +5568,7 @@ return PouchPromise$1.all(filenames.map(function (filename) {
 }
 
 function getDocAttachmentsFromTargetOrSource(target, src, doc) {
-var doCheckForLocalAttachments = isRemote(src) &#x26;&#x26; !isRemote(target);
+var doCheckForLocalAttachments = isRemote(src) &amp;&amp; !isRemote(target);
 var filenames = Object.keys(doc._attachments);
 ...</pre></li>
     </ul>
@@ -5594,7 +5587,7 @@ var filenames = Object.keys(doc._attachments);
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5604,14 +5597,14 @@ var filenames = Object.keys(doc._attachments);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var setupDone = function () {
-  var migrated = dbVersion &#x3c; ADAPTER_VERSION$1;
+  var migrated = dbVersion &lt; ADAPTER_VERSION$1;
   if (migrated) {
     // update the db version within this transaction
-    tx.executeSql(&#x27;UPDATE &#x27; + META_STORE$1 + &#x27; SET db_version = &#x27; +
+    tx.executeSql('UPDATE ' + META_STORE$1 + ' SET db_version = ' +
       ADAPTER_VERSION$1);
   }
   // notify db.<span class="apidocCodeKeywordSpan">id</span>() callers
-  var sql = &#x27;SELECT dbid FROM &#x27; + META_STORE$1;
+  var sql = 'SELECT dbid FROM ' + META_STORE$1;
   tx.executeSql(sql, [], function (tx, result) {
     instanceId = result.rows.item(0).dbid;
     onGetInstanceId();
@@ -5634,7 +5627,7 @@ var setupDone = function () {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5643,17 +5636,17 @@ var setupDone = function () {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-if (opts.since === &#x27;latest&#x27;) {
-  opts.since = &#x27;now&#x27;;
+if (opts.since === 'latest') {
+  opts.since = 'now';
 }
 if (!opts.since) {
   opts.since = 0;
 }
-if (opts.since === &#x27;now&#x27;) {
+if (opts.since === 'now') {
   this.db.<span class="apidocCodeKeywordSpan">info</span>().then(function (info) {
     /* istanbul ignore if */
     if (self.isCancelled) {
-      callback(null, {status: &#x27;cancelled&#x27;});
+      callback(null, {status: 'cancelled'});
       return;
     }
     opts.since = info.update_seq;
@@ -5675,7 +5668,7 @@ if (opts.since === &#x27;now&#x27;) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5700,7 +5693,7 @@ if (opts.since === &#x27;now&#x27;) {
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5741,7 +5734,7 @@ return db.<span class="apidocCodeKeywordSpan">put</span>(doc).then(function (res
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5766,7 +5759,7 @@ return db.<span class="apidocCodeKeywordSpan">put</span>(doc).then(function (res
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5781,7 +5774,7 @@ return db.<span class="apidocCodeKeywordSpan">put</span>(doc).then(function (res
   depDbs[depDbName] = true;
   return doc;
 }
-return upsert(sourceDB, &#x27;_local/&#x27; + localDocName, diffFunction).then(function () {
+return upsert(sourceDB, '_local/' + localDocName, diffFunction).then(function () {
   return sourceDB.<span class="apidocCodeKeywordSpan">registerDependentDatabase</span>(depDbName).then(function (res) {
     var db = res.db;
     db.auto_compaction = true;
@@ -5807,7 +5800,7 @@ return upsert(sourceDB, &#x27;_local/&#x27; + localDocName, diffFunction).then(f
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5832,7 +5825,7 @@ return upsert(sourceDB, &#x27;_local/&#x27; + localDocName, diffFunction).then(f
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5857,7 +5850,7 @@ return upsert(sourceDB, &#x27;_local/&#x27; + localDocName, diffFunction).then(f
   if (len) {
     var args = [];
     var i = -1;
-    while (++i &#x3c; len) {
+    while (++i &lt; len) {
       args[i] = arguments[i];
     }
     return fun.call(this, args);
@@ -5866,7 +5859,7 @@ return upsert(sourceDB, &#x27;_local/&#x27; + localDocName, diffFunction).then(f
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  if (change.id === &#x22;_user/&#x22;) {
+  if (change.id === "_user/") {
     return;
   }
   diff[change.id] = change.changes.map(function (x) {
@@ -5877,7 +5870,7 @@ return target.<span class="apidocCodeKeywordSpan">revsDiff</span>(diff).then(fun
   /* istanbul ignore if */
   if (returnValue.cancelled) {
     completeReplication();
-    throw new Error(&#x27;cancelled&#x27;);
+    throw new Error('cancelled');
   }
   // currentBatch.diffs elements are deleted as the documents are written
   currentBatch.diffs = diffs;
@@ -5894,21 +5887,21 @@ return target.<span class="apidocCodeKeywordSpan">revsDiff</span>(diff).then(fun
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">type = function () {
-  return (typeof this._type === &#x27;function&#x27;) ? this._type() : this.adapter;
+  return (typeof this._type === 'function') ? this._type() : this.adapter;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-// Checks if a PouchDB object is &#x22;remote&#x22; or not. This is
+// Checks if a PouchDB object is "remote" or not. This is
 // designed to opt-in to certain optimizations, such as
-// avoiding checks for &#x22;dependentDbs&#x22; and other things that
-// we know only apply to local databases. In general, &#x22;remote&#x22;
+// avoiding checks for "dependentDbs" and other things that
+// we know only apply to local databases. In general, "remote"
 // should be true for the http adapter, and for third-party
 // adapters with similar expensive boundaries to cross for
 // every API call, such as socket-pouch and worker-pouch.
-// Previously, this was handled via db.<span class="apidocCodeKeywordSpan">type</span>() === &#x27;http&#x27;
+// Previously, this was handled via db.<span class="apidocCodeKeywordSpan">type</span>() === 'http'
 // which is now deprecated.
 
 function isRemote(db) {
-if (typeof db._remote === &#x27;boolean&#x27;) {
+if (typeof db._remote === 'boolean') {
   return db._remote;
 }
 /* istanbul ignore next */
@@ -5924,3 +5917,4 @@ if (typeof db._remote === &#x27;boolean&#x27;) {
     ]
 </div>
 </div>
+</body></html>
